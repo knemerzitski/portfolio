@@ -1,0 +1,15 @@
+.checkbox {
+  appearance: none;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.checkbox:checked::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 1em;
+  content: "\2714";
+  color: theme("colors.secondary.600");
+}

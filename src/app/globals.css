@@ -1,0 +1,58 @@
+@tailwind base;
+
+@layer base {
+  :root {
+    /* ####################### Global Variables ######################## */
+    /* --scrollbar-width: 17px; */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Consistent outline */
+  a:focus-visible,
+  a:focus-visible svg:not(.no-a-outline) {
+    @apply outline outline-1 outline-secondary-500/70;
+  }
+
+  *::selection {
+    @apply text-textInverse bg-backgroundInverse/75;
+  }
+
+  p + p {
+    @apply mt-4;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@tailwind components;
+
+@layer components {
+}
+
+@tailwind utilities;
+
+@layer utilities {
+  .text-fill-color {
+    -webkit-text-fill-color: theme("colors.text");
+  }
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}

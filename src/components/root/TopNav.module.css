@@ -1,0 +1,41 @@
+
+.overlay {
+  transition: all .2s linear, width 0s linear, height 0s linear;  
+  opacity: 0;
+}
+.checkbox:checked ~ .overlay {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mobileMenu nav {
+  transition: all .25s ease;
+  transform-origin: top center;
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+.checkbox:checked ~ header .mobileMenu nav {
+  transition-duration: .1s;
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.mobileMenu {
+}
+
+.checkbox:checked ~ header .mobileMenu {
+  visibility: visible;
+}
+
+.checkbox:checked ~ header .openIcon {
+  visibility: hidden;
+}
+
+.checkbox:checked ~ header .closeIcon {
+  visibility: visible;
+}
+
+
+
+
