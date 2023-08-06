@@ -29,6 +29,7 @@ export default function HomePage() {
       <section id="home" className="
         relative
         h-screen min-h-[50rem] max-h-[75rem]
+        mb-12 md:mb-0
       ">
 
         {/* HERO IMAGE */}
