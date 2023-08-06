@@ -104,7 +104,7 @@ export const projects = [
     </>,
     carouselItems: [
       <Image key="mainPage" className="
-        object-cover object-top h-full rounded
+        object-cover object-top w-full h-full rounded
       " src={saunahouseConfiguratorImg} alt="Saunahouse Configurator Main Page" />
     ],
     tags: [
@@ -156,7 +156,7 @@ export const projects = [
     </>,
     carouselItems: [
       <Image key="mainPage" className="
-        object-cover object-top h-full rounded
+        object-cover object-top w-full h-full rounded
       " src={personnelRegistrationApplicationImg} alt="Personnel Registration Application start" />
     ],
     tags: [
