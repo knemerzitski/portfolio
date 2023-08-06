@@ -160,7 +160,7 @@ export const projects = [
       " src={personnelRegistrationApplicationImg} alt="Personnel Registration Application start" />
     ],
     tags: [
-      'Java', 'C#', 'PC/SC', 'JavaFX', 'WPF', 'Excel'
+      'Java', 'C#', 'PC/SC', 'JavaFX', 'WPF', 'XAML', 'Excel'
     ]
   }
 ];
