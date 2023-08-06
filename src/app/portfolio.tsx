@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import saunahouseConfiguratorImg from '@/assets/images/saunahouse-configurator.jpg';
 import personnelRegistrationApplicationImg from '@/assets/images/personnel-registration-application.jpg';
-import { IconNames } from "@/components/info/Icon";
+import Icon, { IconNames } from "@/components/info/Icon";
 
 export const name = 'Kevin Nemeržitksi';
 export const title = 'Software Engineer';
@@ -116,10 +116,10 @@ export const projects = [
   {
     title: "Personnel Registration Application",
     subtitle: (
-      <ul className="flex justify-between">
-        <li className="flex flex-wrap gap-2">
-          Source:
-          <ul className="flex flex-wrap gap-3">
+      <ul className="flex justify-between gap-1">
+        <li className="flex flex-wrap-reverse items-center gap-2">
+          <Icon type="github" className="h-5 w-auto" />
+          <ul className="flex flex-wrap gap-1 xs:gap-3">
             <li>
               <TextLink href="https://github.com/knemerzitski/isikreg-javafx/">
                 JavaFX
@@ -133,7 +133,7 @@ export const projects = [
           </ul>
         </li>
         <li>
-          <TextLink key="company" className="flex" href="https://mil.ee/en/">
+          <TextLink className="flex" href="https://mil.ee/en/">
             Estonian Defence Forces
           </TextLink>
         </li>
