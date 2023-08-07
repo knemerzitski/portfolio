@@ -6,16 +6,12 @@ import { sesClient } from "./sesClient";
 
 import { isServerEnabled as isRecaptchaEnabled, verify as recaptchaVerify } from "@/libs/grecaptcha";
 import { parseSchema, validate } from "@/libs/validation";
-import { isEnvVarTruthy } from "@/libs/env";
 import { action as formAction, formSchema } from "./form";
 import { mockSesEmails } from '@/libs/debug';
+import { CONTACT_FROM_ADDRESS, CONTACT_TO_ADDRESS, NEXT_PUBLIC_CONTACT_FORM_DISABLED } from '@/libs/env';
 
 const debug = getDebugNamespace('contact');
 
-const FROM_ADDRESS = process.env.CONTACT_FROM_ADDRESS ?? 'contact@knemerzitski.com';
-const TO_ADDRESS = process.env.CONTACT_TO_ADDRESS ?? 'kevin@knemerzitski.com';
-
-const DISABLED: boolean = isEnvVarTruthy(process.env.NEXT_PUBLIC_CONTACT_FORM_DISABLED, false);
 const MOCK_SES = process.env.NODE_ENV === 'production' ? false : mockSesEmails;
 if (MOCK_SES) {
   debug('Mocking ses requests');
@@ -23,7 +19,7 @@ if (MOCK_SES) {
 
 export async function POST(req: NextRequest) {
   // Disabled
-  if (DISABLED) {
+  if (NEXT_PUBLIC_CONTACT_FORM_DISABLED) {
     return new NextResponse(null, { status: 503 })
   }
 
@@ -136,10 +132,10 @@ function createSendEmailCommand(
   }) {
 
   return new SendEmailCommand({
-    FromEmailAddress: FROM_ADDRESS,
+    FromEmailAddress: CONTACT_FROM_ADDRESS,
     Destination: {
       ToAddresses: [
-        TO_ADDRESS
+        CONTACT_TO_ADDRESS
       ],
     },
     ReplyToAddresses: [

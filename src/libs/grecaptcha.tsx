@@ -4,6 +4,7 @@ import TextLink from "@/components/nav/TextLink";
 import Script, { ScriptProps } from "next/script";
 import { mockRecaptcha3 } from '@/libs/debug';
 import { NextRequest } from 'next/server';
+import { GRECAPTCHA3_SECRET_KEY, NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY } from './env';
 
 interface Grecaptcha {
   ready: (callback: () => void) => void,
@@ -14,9 +15,8 @@ const debug = getDebugNamespace('grecaptcha');
 
 declare const grecaptcha: Grecaptcha | undefined;
 
-
-const SITE_KEY = process.env.NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY;
-const SECRET_KEY = process.env.GRECAPTCHA3_SECRET_KEY;
+const SITE_KEY = NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY;
+const SECRET_KEY = GRECAPTCHA3_SECRET_KEY;
 
 const GOOD_SCORE = 0.5;
 const VERIFY_URL = 'https://www.recaptcha.net/recaptcha/api/siteverify';

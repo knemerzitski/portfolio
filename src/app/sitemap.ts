@@ -1,12 +1,11 @@
+import { APP_ORIGIN } from '@/libs/env'
 import { MetadataRoute } from 'next'
  
-
-const APP_URL = process.env.APP_URL ?? 'https://knemerzitski.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: APP_URL,
+      url: APP_ORIGIN,
       lastModified: new Date(),
     },
   ]
