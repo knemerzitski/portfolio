@@ -94,14 +94,14 @@ export function SmallCookieConsentModal({
   onClose = () => { },
   ...restProps
 }: ModalProps) {
-  const { openModal } = useModalsContext();
+  const modalsContext = useModalsContext();
   const cookieConsentContext = useCookieConsentContext();
   const cookieConsent = cookieConsentContext?.getConsent();
 
   function handleDetails() {
     onClose();
-    if (openModal) {
-      openModal({
+    if (modalsContext) {
+      modalsContext.openModal({
         props: {
           overlayCloseable: false,
         },
