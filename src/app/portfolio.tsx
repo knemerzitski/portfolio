@@ -54,16 +54,16 @@ export const skills: Readonly<Skill[]> = [
   { text: 'Python', icon: 'python', },
   { text: 'C#', icon: 'csharp' },
   { text: 'PHP', icon: 'php', },
-  { text: 'HTML',  icon: 'html', },
+  { text: 'HTML', icon: 'html', },
   { text: 'CSS', icon: 'css' },
   { text: 'Typescript', icon: 'ts' },
   { text: 'Vue', icon: 'vue' },
   { text: 'React', icon: 'react' },
-  { text: 'SQL', icon: 'db'},
+  { text: 'SQL', icon: 'db' },
   { text: 'Docker', icon: 'docker', },
   { text: 'Git', icon: 'git', },
   { text: 'Terminal', icon: 'terminal', },
-  { text: 'Blender', icon : 'blender', },
+  { text: 'Blender', icon: 'blender', },
 ];
 
 export const projects = [
@@ -103,9 +103,11 @@ export const projects = [
       </ol>
     </>,
     carouselItems: [
-      <Image key="mainPage" className="
-        object-cover object-top w-full h-full rounded
-      " src={saunahouseConfiguratorImg} alt="Saunahouse Configurator Main Page" />
+      <Image key="mainPage" className={`
+        object-cover max-h-[50vh]
+        xxs:object-contain xxs:w-auto xxs:h-auto 
+        mx-auto rounded 
+      `} src={saunahouseConfiguratorImg} alt="Saunahouse Configurator Main Page" />
     ],
     tags: [
       'Vue', 'Javascript', 'HTML', 'Sass', 'PHP',
@@ -155,9 +157,19 @@ export const projects = [
       </p>
     </>,
     carouselItems: [
-      <Image key="mainPage" className="
-        object-cover object-top w-full h-full rounded
-      " src={personnelRegistrationApplicationImg} alt="Personnel Registration Application start" />
+      <iframe key="youtubeDemo" className={`
+        aspect-video w-full mx-auto
+      `}
+        src="https://www.youtube-nocookie.com/embed/syDuKJNU7PU"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
+      </iframe>,
+      // <Image key="mainPage" className="
+      //   object-cover max-h-[50vh]
+      //   xxs:object-contain xxs:w-auto xxs:h-auto 
+      //   mx-auto rounded 
+      // " src={personnelRegistrationApplicationImg} alt="Personnel Registration Application start" />
     ],
     tags: [
       'Java', 'C#', 'PC/SC', 'JavaFX', 'WPF', 'XAML', 'Excel'
