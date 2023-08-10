@@ -38,7 +38,7 @@ export const aboutMe = (
     <p>
       When i was a teenager, I was curious how multiplayer games work.
       I set up game servers to play and have fun with friends.
-      I wanted to make changes to the code which eventually led me into learning programming.
+      I wanted to make changes to the code which eventually led me into programming.
     </p>
 
     <p>
