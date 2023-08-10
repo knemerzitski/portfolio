@@ -43,6 +43,9 @@
 @tailwind components;
 
 @layer components {
+  .scroll-hidden::-webkit-scrollbar {
+    display:none;
+  }
 }
 
 @tailwind utilities;
