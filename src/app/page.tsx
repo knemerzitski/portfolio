@@ -85,28 +85,38 @@ export default function HomePage() {
           <ul className="flex flex-col gap-24">
             {projects.map((project, projectIndex) => (
               <li key={projectIndex}>
-                <Card className="flex flex-col mb-6">
-                  <h3 className="text-2xl text-center">
-                    {project.title}
-                  </h3>
+                <Card>
+                  <div className="
+                  flex flex-col md:flex-row mb-6 md:gap-5
+                  ">
+                    <h3 className="text-2xl mb-6 text-center block md:hidden">
+                      {project.title}
+                    </h3>
 
-                  <ul className="mt-6 md:mt-8 max-h-[50vh] w-full h-full">
-                    {project.carouselItems.map((item) => (
-                      <li key={item.key}>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                    <div className="md:basis-1/2 max-h-[60vh] mb-3 md:mb-0">
+                      <div className="h-full">
+                        {project.hero}
 
-                  <div className="mt-6 md:mt-8 text-base">
-                    {project.subtitle}
+                      </div>
+
+                    </div>
+
+                    <div className="md:basis-1/2">
+                      <h3 className="text-2xl hidden md:block">
+                        {project.title}
+                      </h3>
+
+                      <div className="mt-2">
+                        {project.subtitle}
+                      </div>
+
+                      <div className="mt-8">
+                        {project.shortDesc}
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="mt-8 md:mt-10">
-                    {project.desc}
-                  </div>
-
-                  <div className="mt-8">
+                  <div className="flex flex-col sm:flex-row justify-between items-end gap-8 sm:gap-4">
                     <ul className="flex flex-wrap gap-4">
                       {project.tags.map((tag) => (
                         <li key={tag}>
@@ -114,6 +124,11 @@ export default function HomePage() {
                         </li>
                       ))}
                     </ul>
+                    <CallToActionButton
+                      className="whitespace-nowrap"
+                      href="/projects/saunahouse-configurator">
+                      Project Page
+                    </CallToActionButton>
                   </div>
                 </Card>
               </li>

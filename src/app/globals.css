@@ -24,6 +24,10 @@
     @apply mt-4;
   }
 
+  iframe {
+    border: 0;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html:focus-within {
       scroll-behavior: auto;
