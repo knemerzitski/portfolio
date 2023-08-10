@@ -28,7 +28,7 @@ export default function HomePage() {
       {/* HERO */}
       <section id="home" className="
         relative
-        h-screen min-h-[50rem] max-h-[75rem]
+        h-screen min-h-[35rem] max-h-[75rem]
         mb-12 md:mb-0
       ">
 
@@ -96,7 +96,6 @@ export default function HomePage() {
                     <div className="md:basis-1/2 max-h-[60vh] mb-3 md:mb-0">
                       <div className="h-full">
                         {project.hero}
-
                       </div>
 
                     </div>
