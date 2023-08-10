@@ -46,7 +46,6 @@ export default function TopNav() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
   const topNavId = 'topnav';
-  const mobileBreakpoint = 'md';
 
   return (
     <>
@@ -60,17 +59,17 @@ export default function TopNav() {
         fixed w-full h-full
         bg-overlay/50
         z-10
-        invisible ${mobileBreakpoint}:hidden
+        invisible md:hidden
         ${styles.overlay}
       `}></label>
 
       <header className="
-        fixed w-full z-10
+        fixed w-full z-10 top-0
       ">
 
         {/* DESKTOP & MOBILE WITH ICON */}
         <div className={`
-          px-6 ${mobileBreakpoint}:px-10
+          px-6 md:px-10
 
           bg-primary-800/95
           backdrop-blur-xs
@@ -83,8 +82,8 @@ export default function TopNav() {
             {/* DESKTOP NAV */}
             <nav className={`
             hidden
-            ${mobileBreakpoint}:block
-          `}>
+            md:block
+          `} aria-label="Main">
               <NavItems
                 links={links}
                 ulClassName="flex gap-2 text-lg"
@@ -96,10 +95,10 @@ export default function TopNav() {
             {/* MOBILE ICON */}
             <label htmlFor={topNavId} className={`
               relative 
-              px-2 py-4 ${mobileBreakpoint}:py-6
+              px-2 py-4 md:py-6
               text-xl
               hover:cursor-pointer
-              block ${mobileBreakpoint}:hidden
+              block md:hidden
             `}>
               <div className="w-5 h-5">
                 <div className={`absolute visible ${styles.openIcon}`}>
@@ -126,12 +125,13 @@ export default function TopNav() {
           bg-primary-800
           border border-solid border-transparent border-t-primary-950 
           shadow-dp6 shadow-shadow/60
-           ${mobileBreakpoint}:hidden
+           md:hidden
           invisible ${styles.mobileMenu}
         `}>
 
           {/* MOBILE NAV */}
-          <nav className="overflow-y-auto max-h-[calc(100vh-4.5rem)] short:overflow-y-hidden short:max-h-max">
+          <nav className="overflow-y-auto max-h-[calc(100vh-4.5rem)] short:overflow-y-hidden short:max-h-max"
+            aria-label="Main">
             <NavItems
               links={links}
               ulClassName="flex flex-col text-lg divide-y divide-primary-400"
