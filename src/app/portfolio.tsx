@@ -78,15 +78,17 @@ export const projects = [
     slug: 'saunahouse-configurator',
     title: "Saunahouse Configurator",
     subtitle: (
-      <ul className="flex justify-between">
+      <ul className="flex justify-between gap-2">
         <li>
-          <TextLink className="flex items-center" href="https://design-saunahaus.de/konfigurator/">
+          <TextLink className="flex items-center gap-1 leading-5" href="https://design-saunahaus.de/konfigurator/">
+            <Icon type="eye" className="w-5 h-5 shrink-0" />
             Visit Live
           </TextLink>
-          <small className="absolute text-xs">(Source is not available)</small>
+          <small className="absolute text-xs hidden xxs:block">(Source is not available)</small>
         </li>
         <li>
-          <TextLink className="flex items-center" href="https://design-saunahaus.de/">
+          <TextLink className="flex items-center gap-1 leading-5" href="https://design-saunahaus.de/">
+            <Icon type="building" className="w-5 h-5 shrink-0" />
             SQUARE Saunahaus OÜ
           </TextLink>
         </li>
@@ -126,24 +128,26 @@ export const projects = [
     slug: 'personnel-registration-app',
     title: "Personnel Registration Application",
     subtitle: (
-      <ul className="flex justify-between gap-1">
-        <li className="flex flex-wrap-reverse items-center gap-2">
-          <Icon type="github" className="h-5 w-auto" />
-          <ul className="flex flex-wrap gap-1 xs:gap-3">
+      <ul className="flex justify-between gap-2">
+        <li>
+          <ul className="flex flex-wrap gap-4 xs:gap-3">
             <li>
-              <TextLink href="https://github.com/knemerzitski/isikreg-javafx/">
+              <TextLink className="flex items-center gap-1 leading-5" href="https://github.com/knemerzitski/isikreg-javafx/">
+                <Icon type="github" className="w-auto h-5" />
                 JavaFX
               </TextLink>
             </li>
             <li>
-              <TextLink href="https://github.com/knemerzitski/isikreg-wpf/">
+              <TextLink className="flex items-center gap-1 leading-5" href="https://github.com/knemerzitski/isikreg-wpf/">
+                <Icon type="github" className="w-auto h-5" />
                 WPF
               </TextLink>
             </li>
           </ul>
         </li>
         <li>
-          <TextLink className="flex" href="https://mil.ee/en/">
+          <TextLink className="flex items-center gap-1" href="https://mil.ee/en/">
+            <Icon type="building" className="w-5 h-5 shrink-0" />
             Estonian Defence Forces
           </TextLink>
         </li>

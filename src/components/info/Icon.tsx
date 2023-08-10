@@ -4,6 +4,8 @@ import Envelope from '@/assets/icons/envelope.svg';
 import ArrowDown from '@/assets/icons/arrow-down.svg';
 import ExternalLink from '@/assets/icons/external-link.svg';
 import Terminal from '@/assets/icons/terminal.svg';
+import Eye from '@/assets/icons/eye.svg';
+import Building from '@/assets/icons/building.svg';
 
 import GithubLogo from '@/assets/icons/third-party/github-mark-white.svg';
 import PythonLogo from '@/assets/icons/third-party/python-logo-only.svg';
@@ -29,6 +31,8 @@ const ICON_COMPONENTS = {
   arrowDown: ArrowDown,
   externalLink: ExternalLink,
   terminal: Terminal,
+  eye: Eye,
+  building: Building,
 
   // Third party icons
   github: GithubLogo,
