@@ -98,16 +98,11 @@ export const projects = [
     </p>,
     desc: <>
       <p>
-        This web app accelerates client communication.
-        Clients can easily request for a project offer of their dream saunahouse.
-      </p>
-      <p>
-        I developed Saunahouse Configurator while working at SQUARE Saunahaus.
-      </p>
-      <p>
-        I chose Vue because I wanted to learn reactive web development and component based architecture.
-        In essence Saunahosue Configurator is a customized request form.
+        Saunahouse Configurator is a Wordpress plugin. In essence it&apos;s a customized request form.
         It has an admin panel to manage saunas, requests, email templates and settings.
+      </p>
+      <p>
+        I chose to develop the app in Vue because I wanted to learn reactive web development and component based architecture.
       </p>
     </>,
     hero: (
