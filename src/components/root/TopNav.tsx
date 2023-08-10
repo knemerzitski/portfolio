@@ -81,9 +81,9 @@ export default function TopNav() {
           ">
             {/* DESKTOP NAV */}
             <nav className={`
-            hidden
-            md:block
-          `} aria-label="Main">
+              hidden
+              md:block
+            `}>
               <NavItems
                 links={links}
                 ulClassName="flex gap-2 text-lg"
@@ -130,8 +130,7 @@ export default function TopNav() {
         `}>
 
           {/* MOBILE NAV */}
-          <nav className="overflow-y-auto max-h-[calc(100vh-4.5rem)] short:overflow-y-hidden short:max-h-max"
-            aria-label="Main">
+          <nav className="overflow-y-auto max-h-[calc(100vh-4.5rem)] short:overflow-y-hidden short:max-h-max">
             <NavItems
               links={links}
               ulClassName="flex flex-col text-lg divide-y divide-primary-400"
