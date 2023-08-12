@@ -125,7 +125,7 @@ export default function HomePage() {
                     </ul>
                     <CallToActionButton
                       className="whitespace-nowrap"
-                      href="/projects/saunahouse-configurator">
+                      href={`/projects/${project.slug}`}>
                       Project Page
                     </CallToActionButton>
                   </div>
