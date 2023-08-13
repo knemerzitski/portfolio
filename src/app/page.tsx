@@ -4,7 +4,7 @@ import Tag from '@/components/info/Tag';
 
 import Image from 'next/image';
 
-import portfolioHeroImg from '@/assets/images/portfolio-hero.jpg'
+import portfolioHeroImg from '@/assets/images/hexagons-gear.webp'
 
 import CallToActionButton from '@/components/nav/CallToAction';
 import Section from '@/components/container/Section';
@@ -33,7 +33,11 @@ export default function HomePage() {
       ">
 
         {/* HERO IMAGE */}
-        <Image priority className="absolute object-cover w-full h-full" src={portfolioHeroImg} alt="Calm night forest mountain starry sky" />
+        <Image priority 
+          className="absolute object-cover w-full h-full" 
+          quality={95}
+          src={portfolioHeroImg} 
+          alt="Hexagon terrain, a big gear and wires" />
         <div className="absolute bg-gradient-to-b from-transparent from-80% to-background w-full h-full"></div>
 
         <Content className="absolute left-0 right-0 w-full h-full flex justify-center items-center">

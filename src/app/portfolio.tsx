@@ -1,14 +1,14 @@
 import TextLink from "@/components/nav/TextLink";
 import Image from "next/image";
 
-import imgShCnfMain from '@/assets/images/shcnf/saunahouse-configurator-main.jpg';
-import imgShCnfFacade from '@/assets/images/shcnf/saunahouse-configurator-facade.jpg';
-import imgShCnfGallery from '@/assets/images/shcnf/saunahouse-configurator-gallery.jpg';
-import imgShCnfOverview from '@/assets/images/shcnf/saunahouse-configurator-saved-overview.jpg';
+import imgShCnfMain from '@/assets/images/shcnf/saunahouse-configurator-main.webp';
+import imgShCnfFacade from '@/assets/images/shcnf/saunahouse-configurator-facade.webp';
+import imgShCnfGallery from '@/assets/images/shcnf/saunahouse-configurator-gallery.webp';
+import imgShCnfOverview from '@/assets/images/shcnf/saunahouse-configurator-saved-overview.webp';
 
-import imgIsikregMain from '@/assets/images/isikreg/personnel-registration-app-main.jpg';
-import imgIsikregCardRegister from '@/assets/images/isikreg/personnel-registration-app-card-register.jpg';
-import imgIsikregInsertPerson from '@/assets/images/isikreg/personnel-registration-app-insert-person.jpg';
+import imgIsikregMain from '@/assets/images/isikreg/personnel-registration-app-main.webp';
+import imgIsikregCardRegister from '@/assets/images/isikreg/personnel-registration-app-card-register.webp';
+import imgIsikregInsertPerson from '@/assets/images/isikreg/personnel-registration-app-insert-person.webp';
 
 import Icon, { IconNames } from "@/components/info/Icon";
 
