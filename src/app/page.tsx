@@ -35,8 +35,10 @@ export default function HomePage() {
         {/* HERO IMAGE */}
         <Image priority 
           className="absolute object-cover w-full h-full" 
-          quality={95}
+          quality={100}
           src={portfolioHeroImg} 
+          placeholder="blur"
+          sizes="100vw"
           alt="Hexagon terrain, a big gear and wires" />
         <div className="absolute bg-gradient-to-b from-transparent from-80% to-background w-full h-full"></div>
 

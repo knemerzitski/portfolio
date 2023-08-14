@@ -110,13 +110,15 @@ export const projects = [
     hero: (
       <Image key="mainPage" className={`
         object-cover object-top w-full h-full rounded
-      `} src={imgShCnfMain} alt="Saunahouse Configurator main page" />
+      `} 
+      sizes="(max-width: 768px) 100vw, 512px"
+      src={imgShCnfMain} alt="Saunahouse Configurator main page" />
     ),
     imagesVideos: [
-      <Image key="main" className="rounded" src={imgShCnfMain} alt="Saunahouse Configurator main page" />,
-      <Image key="facade" className="rounded" src={imgShCnfFacade} alt="Saunahouse Configurator facade selection" />,
-      <Image key="gallery" className="rounded" src={imgShCnfGallery} alt="Saunahouse Configurator gallery of selection" />,
-      <Image key="overview" className="rounded" src={imgShCnfOverview} alt="Saunahouse Configurator saved overview" />
+      <Image key="main" className="rounded" sizes="1024px" src={imgShCnfMain} alt="Saunahouse Configurator main page" />,
+      <Image key="facade" className="rounded" sizes="1024px" src={imgShCnfFacade} alt="Saunahouse Configurator facade selection" />,
+      <Image key="gallery" className="rounded" sizes="1024px" src={imgShCnfGallery} alt="Saunahouse Configurator gallery of selection" />,
+      <Image key="overview" className="rounded" sizes="1024px" src={imgShCnfOverview} alt="Saunahouse Configurator saved overview" />
     ],
     tags: [
       'Vue', 'Javascript', 'HTML', 'Sass', 'PHP',
@@ -193,9 +195,9 @@ export const projects = [
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
       </iframe>,
-      <Image key="mainPage" className="rounded" src={imgIsikregCardRegister} alt="Personnel Registration Application smartcard registration successful" />,
-      <Image key="cardRegister" className="rounded" src={imgIsikregInsertPerson} alt="Personnel Registration Application insert new person" />,
-      <Image key="insertPerson" className="rounded" src={imgIsikregMain} alt="Personnel Registration Application initial view" />
+      <Image key="mainPage" className="rounded" sizes="1024px" src={imgIsikregCardRegister} alt="Personnel Registration Application smartcard registration successful" />,
+      <Image key="cardRegister" className="rounded" sizes="1024px" src={imgIsikregInsertPerson} alt="Personnel Registration Application insert new person" />,
+      <Image key="insertPerson" className="rounded" sizes=" 1024px" src={imgIsikregMain} alt="Personnel Registration Application initial view" />
     ],
     tags: [
       'Java', 'C#', 'PC/SC', 'JavaFX', 'WPF', 'XAML', 'Excel'
