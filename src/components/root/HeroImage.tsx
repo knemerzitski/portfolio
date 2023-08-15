@@ -77,22 +77,9 @@ export function Particle(
     <g className={`${styles.particleRoot} ${className}`}>
       <g className={styles.xCircleAnim}><g className={styles.yCircleAnim}>
         <g className={styles.xShape8Anim}><g className={styles.yShape8Anim}>
-          <g className={`${styles.moveAroundGearAnim}`}>
-            <rect
-              transform="translate(-4,-4)"
-              width="8"
-              height="8"
-              fill="rgb(238, 160, 15)"
-              rx="100%"
-              filter="blur(2px)"
-            />
-            <rect
-              transform="translate(-1.5,-1.5)"
-              width="3"
-              height="3"
-              fill="white"
-              rx="100%"
-            />
+          <g className={styles.moveAroundGearAnim}>
+            <rect className={styles.particleGlow} rx="100%" />
+            <rect className={styles.particleCore} rx="100%" />
           </g>
         </g></g>
       </g></g>

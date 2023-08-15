@@ -40,6 +40,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        white: 'white',
         text: `hsl(0deg 0% 95%)`,
         textInverse: `hsl(0deg 0% 6%)`,
         background: `hsl(${primaryColor.h}deg, 20%, 6%)`,

@@ -166,3 +166,26 @@
     }
   }
 }
+
+.particleGlow {
+  width: 8px;
+  height: 8px;
+  transform: translate(-4px, -4px);
+
+  fill: theme("colors.accent2");
+  filter: blur(2px);
+  animation: blurGrow 10s infinite ease-in-out;
+}
+
+@keyframes blurGrow {
+  50% {
+    filter: blur(4px);
+  }
+}
+
+.particleCore {
+  width: 2px;
+  height: 2px;
+  transform: translate(-1px, -1px);
+  fill: theme("colors.white");
+}
