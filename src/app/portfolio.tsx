@@ -110,21 +110,26 @@ export const projects = [
     hero: (
       <Image key="mainPage" className={`
         object-cover object-top w-full h-full rounded
-      `} 
-      sizes="(max-width: 768px) 100vw, 512px"
-      src={imgShCnfMain} alt="Saunahouse Configurator main page" />
+      `}
+        sizes="(max-width: 768px) 100vw, 512px"
+        src={imgShCnfMain} alt="Saunahouse Configurator main page" />
     ),
-    imagesVideos: [
-      <Image key="main" className="rounded" sizes="1024px" src={imgShCnfMain} alt="Saunahouse Configurator main page" />,
-      <Image key="facade" className="rounded" sizes="1024px" src={imgShCnfFacade} alt="Saunahouse Configurator facade selection" />,
-      <Image key="gallery" className="rounded" sizes="1024px" src={imgShCnfGallery} alt="Saunahouse Configurator gallery of selection" />,
-      <Image key="overview" className="rounded" sizes="1024px" src={imgShCnfOverview} alt="Saunahouse Configurator saved overview" />
-    ],
     tags: [
       'Vue', 'Javascript', 'HTML', 'Sass', 'PHP',
       'WordPress', 'SQL', 'Webpack', 'REST API',
       'reCAPTCHA v3', 'Email'
-    ]
+    ],
+    categories: [
+      {
+        title: 'Screenshots',
+        list: [
+          <Image key="main" className="rounded" sizes="1024px" src={imgShCnfMain} alt="Saunahouse Configurator main page" />,
+          <Image key="facade" className="rounded" sizes="1024px" src={imgShCnfFacade} alt="Saunahouse Configurator facade selection" />,
+          <Image key="gallery" className="rounded" sizes="1024px" src={imgShCnfGallery} alt="Saunahouse Configurator gallery of selection" />,
+          <Image key="overview" className="rounded" sizes="1024px" src={imgShCnfOverview} alt="Saunahouse Configurator saved overview" />
+        ]
+      }
+    ],
   },
   {
     slug: 'personnel-registration-app',
@@ -187,17 +192,27 @@ export const projects = [
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
       </iframe>
     ),
-    imagesVideos: [
-      <iframe key="youtubeDemo" className={`
+    categories: [
+      {
+        title: 'Short Demo',
+        list: [
+          <iframe key="youtubeDemo" className={`
         aspect-video w-full mx-auto
       `}
-        src="https://www.youtube-nocookie.com/embed/syDuKJNU7PU"
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
-      </iframe>,
-      <Image key="mainPage" className="rounded" sizes="1024px" src={imgIsikregCardRegister} alt="Personnel Registration Application smartcard registration successful" />,
-      <Image key="cardRegister" className="rounded" sizes="1024px" src={imgIsikregInsertPerson} alt="Personnel Registration Application insert new person" />,
-      <Image key="insertPerson" className="rounded" sizes=" 1024px" src={imgIsikregMain} alt="Personnel Registration Application initial view" />
+            src="https://www.youtube-nocookie.com/embed/syDuKJNU7PU"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
+          </iframe>,
+        ]
+      },
+      {
+        title: 'Screenshots',
+        list: [
+          <Image key="mainPage" className="rounded" sizes="1024px" src={imgIsikregCardRegister} alt="Personnel Registration Application smartcard registration successful" />,
+          <Image key="cardRegister" className="rounded" sizes="1024px" src={imgIsikregInsertPerson} alt="Personnel Registration Application insert new person" />,
+          <Image key="insertPerson" className="rounded" sizes=" 1024px" src={imgIsikregMain} alt="Personnel Registration Application initial view" />
+        ]
+      }
     ],
     tags: [
       'Java', 'C#', 'PC/SC', 'JavaFX', 'WPF', 'XAML', 'Excel'

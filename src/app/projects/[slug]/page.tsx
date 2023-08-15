@@ -18,7 +18,7 @@ export default function ProjectPage({
   params: { slug: string }
 }) {
   const project = projects.find(project => project.slug === params.slug);
-  if (!project){
+  if (!project) {
     return notFound();
   }
 
@@ -52,14 +52,18 @@ export default function ProjectPage({
               </div>
             </div>
 
-            <h2 className="mt-12 text-lg font-medium">Images / Videos</h2>
-            <ul className="mt-4 flex flex-col gap-10">
-              {project.imagesVideos.map((item) => (
-                <li key={item.key}>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            {project.categories.map((category, index) => (
+              <div key={index}>
+                <h2 className="mt-12 text-lg font-medium">{category.title}</h2>
+                <ul className="mt-4 flex flex-col gap-10">
+                  {category.list.map((item) => (
+                    <li key={item.key}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </Card>
         </Content>
       </Section>
