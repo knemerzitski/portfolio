@@ -2,16 +2,13 @@ import Card from '@/components/container/Card';
 import SectionHeading from '@/components/container/SectionHeading';
 import Tag from '@/components/info/Tag';
 
-import Image from 'next/image';
-
-import portfolioHeroImg from '@/assets/images/hexagons-gear.webp'
-
 import CallToActionButton from '@/components/nav/CallToAction';
 import Section from '@/components/container/Section';
 import Content from '@/components/container/Content';
 import Icon from '@/components/info/Icon';
 import ContactForm from '@/components/root/ContactForm';
 import Anchor from '@/components/nav/Anchor';
+import HeroImage from '@/components/root/HeroImage';
 
 import {
   name as portfolioName,
@@ -33,13 +30,7 @@ export default function HomePage() {
       ">
 
         {/* HERO IMAGE */}
-        <Image priority 
-          className="absolute object-cover w-full h-full" 
-          quality={100}
-          src={portfolioHeroImg} 
-          placeholder="blur"
-          sizes="100vw"
-          alt="Hexagon terrain, a big gear and wires" />
+        <HeroImage />
         <div className="absolute bg-gradient-to-b from-transparent from-80% to-background w-full h-full"></div>
 
         <Content className="absolute left-0 right-0 w-full h-full flex justify-center items-center">
