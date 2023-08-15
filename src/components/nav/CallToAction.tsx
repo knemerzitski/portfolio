@@ -15,7 +15,7 @@ export default function CallToActionButton({
       px-5 py-3
       bg-secondary-700
       rounded-sm
-      shadow-dp4 shadow-shadow/80
+      shadow-dp4 shadow-shadow/40
 
       hover:brightness-110
       hover:shadow-btn-hover
