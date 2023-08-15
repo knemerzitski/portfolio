@@ -36,18 +36,18 @@ export const aboutMe = (
     </p>
 
     <p>
-      When i was a teenager, I was curious how multiplayer games work.
-      I set up game servers to play and have fun with friends.
-      I wanted to make changes to the code which eventually led me into programming.
+      When I was a teenager, played a lot of multiplayer games.
+      I got curious how they work so I set up game servers just for fun.
+      I wanted to make changes which eventually led me into programming.
     </p>
 
     <p>
       I love writing code and seeing it work.
-      It motivating knowing that something I have worked on is being used.
+      It&apos;s motivating knowing that something I have worked on is being used.
     </p>
 
     <p>
-      Outside of technology, I like to excerise and play tennis. And also, bunnies are adorable!
+      Outside of technology, I like to exercise and play tennis. Also, bunnies are adorable!
     </p>
   </>
 );
@@ -84,7 +84,7 @@ export const projects = [
             <Icon type="eye" className="w-5 h-5 shrink-0" />
             Visit Live
           </TextLink>
-          <small className="absolute text-xs hidden xxs:block">(Source is not available)</small>
+          <small className="absolute text-xs hidden xxs:block">(Source not available)</small>
         </li>
         <li>
           <TextLink className="flex items-center gap-1 leading-5" href="https://design-saunahaus.de/">
@@ -95,16 +95,21 @@ export const projects = [
       </ul>
     ),
     shortDesc: <p>
-      This web app accelerates client communication.
-      Clients can easily request for a project offer of their dream saunahouse.
+      Specialized WordPress plugin that accelerates client communication.
+      Easily request for a sauna project offer form predefined templates.
     </p>,
     desc: <>
       <p>
-        Saunahouse Configurator is a Wordpress plugin. In essence it&apos;s a customized request form.
-        It has an admin panel to manage saunas, requests, email templates and settings.
+        Saunahouse Configurator is a Wordpress plugin that accelerates client communication.
+      </p>
+      <p>
+        In essence it&apos;s a customized request form with predefined templates.
+        Templates can be combined to create a dynamic form with similar content.
+        There is also an admin panel to manage form templates, requests, email templates and settings.
       </p>
       <p>
         I chose to develop the app in Vue because I wanted to learn reactive web development and component based architecture.
+        In WordPress environment it was a more flexible option compared to multiple pages communicating over GET requests.
       </p>
     </>,
     hero: (
@@ -161,7 +166,7 @@ export const projects = [
       </ul>
     ),
     shortDesc: <p>
-      This app enables quick registration of personnel using multiple card readers.
+      App that enables quick registration of personnel using multiple card readers.
       For example during the gathering of reserve army training exercises.
     </p>
     ,
@@ -172,7 +177,7 @@ export const projects = [
       </p>
       <p>
         I initially developed it for Estonian Defence Forces during my conscript service.
-        It is built with JavaFX and later ported to WPF.
+        It was made with JavaFX and later ported to WPF.
       </p>
       <p>
         Registrations can be conducted manually by searching the table or by using an Estonian ID-card.
