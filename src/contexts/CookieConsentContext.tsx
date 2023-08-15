@@ -49,7 +49,7 @@ const cookieDescriptions = {
           duration: ['2 months'],
         }
       ]
-    },
+    },*/
     media: {
       name: 'External Media',
       cookies: [
@@ -57,12 +57,12 @@ const cookieDescriptions = {
           service: 'Youtube',
           provider: 'Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland',
           purpose: 'Used to display Youtube videos.',
-          policy: 'https://policies.google.com/privacy',
+          policy: <TextLink href="https://policies.google.com/privacy">https://policies.google.com/privacy</TextLink>,
           cookies: ['NID'],
           duration: ['6 months'],
         }
       ]
-    }*/
+    }
   }
 };
 
