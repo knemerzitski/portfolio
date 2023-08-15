@@ -1,6 +1,5 @@
-
 .overlay {
-  transition: all .2s linear, width 0s linear, height 0s linear;  
+  transition: all .2s linear, width 0s linear, height 0s linear;
   opacity: 0;
 }
 .checkbox:checked ~ .overlay {
@@ -8,23 +7,25 @@
   opacity: 1;
 }
 
-.mobileMenu nav {
+.checkbox ~ header > .mainNav {
+  transition: box-shadow .25s ease;
+}
+
+.checkbox:checked ~ header > .mainNav {
+  transition-duration: .1s;
+  --tw-shadow-color: transparent;
+}
+
+.checkbox ~ header .mobileMenu {
   transition: all .25s ease;
-  transform-origin: top center;
-  transform: scaleY(0);
+  transform: translateY(-100%);
   opacity: 0;
 }
 
-.checkbox:checked ~ header .mobileMenu nav {
-  transition-duration: .1s;
-  transform: scaleY(1);
-  opacity: 1;
-}
-
-.mobileMenu {
-}
-
 .checkbox:checked ~ header .mobileMenu {
+  transition-duration: .1s;
+  transform: translateY(0%);
+  opacity: 1;
   visibility: visible;
 }
 
@@ -35,7 +36,3 @@
 .checkbox:checked ~ header .closeIcon {
   visibility: visible;
 }
-
-
-
-

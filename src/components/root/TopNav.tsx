@@ -74,6 +74,7 @@ export default function TopNav() {
           bg-primary-800/95
           backdrop-blur-xs
           shadow-dp24 shadow-black/40
+          ${styles.mainNav}
         `}>
           <div className="
             max-w-screen-lg mx-auto
@@ -125,7 +126,7 @@ export default function TopNav() {
           bg-primary-800
           border border-solid border-transparent border-t-primary-950 
           shadow-dp6 shadow-shadow/60
-           md:hidden
+          md:hidden -z-10
           invisible ${styles.mobileMenu}
         `}>
 
