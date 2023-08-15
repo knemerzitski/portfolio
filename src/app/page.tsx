@@ -60,12 +60,12 @@ export default function HomePage() {
       </section>
 
       {/* ABOUT */}
-      <Section id="about">
+      <Section id="about" className="overflow-x-clip">
         <SectionHeading>About Me</SectionHeading>
         <Content className="relative">
           <div className={`
             absolute left-1/2 top-1/2 w-[160%] h-[145%]
-            overflow-hidden -z-10
+            -z-10
             -translate-x-1/2 -translate-y-1/2
             from-accent2 to-accent1
             bg-gradient-conic-corner
@@ -170,12 +170,12 @@ export default function HomePage() {
       </Section>
 
       {/* CONTACT */}
-      <Section id="contact">
+      <Section id="contact" className="overflow-x-clip">
         <SectionHeading>Contact</SectionHeading>
         <Content className="relative">
           <div className={`
             absolute left-1/2 top-1/2 w-[160%] h-[145%]
-            overflow-hidden -z-10
+            -z-10
             -translate-x-1/2 -translate-y-1/2
             from-accent1 to-accent1/50
             bg-gradient-conic-corner
