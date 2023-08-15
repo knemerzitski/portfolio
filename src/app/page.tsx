@@ -62,7 +62,16 @@ export default function HomePage() {
       {/* ABOUT */}
       <Section id="about">
         <SectionHeading>About Me</SectionHeading>
-        <Content>
+        <Content className="relative">
+          <div className={`
+            absolute left-1/2 top-1/2 w-[160%] h-[145%]
+            overflow-hidden -z-10
+            -translate-x-1/2 -translate-y-1/2
+            from-accent2 to-accent1
+            bg-gradient-conic-corner
+            blur-[100px] opacity-[0.02] rounded-full
+           `}>
+          </div>
           <Card className="max-w-3xl mx-auto">
             <div className="text-justify mb-14">
               {/* md:text-left */}
@@ -163,7 +172,16 @@ export default function HomePage() {
       {/* CONTACT */}
       <Section id="contact">
         <SectionHeading>Contact</SectionHeading>
-        <Content>
+        <Content className="relative">
+          <div className={`
+            absolute left-1/2 top-1/2 w-[160%] h-[145%]
+            overflow-hidden -z-10
+            -translate-x-1/2 -translate-y-1/2
+            from-accent1 to-accent1/50
+            bg-gradient-conic-corner
+            blur-[100px] opacity-[0.02] rounded-full
+           `}>
+          </div>
           <ContactForm />
         </Content>
       </Section>

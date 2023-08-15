@@ -46,7 +46,9 @@ module.exports = {
         backgroundInverse: `hsl(${primaryColor.h}deg, 25%, 95%)`,
         shadow: `black`,
         overlay: `black`,
-
+        accent1: 'rgb(128, 11, 196)',
+        accent2: 'rgb(238, 160, 15)',
+        
         primary: {
           50: `hsl(${primaryColor.h}deg, ${primaryColor.s - 8}%,  ${primaryColor.l + 10}%)`,
           100: `hsl(${primaryColor.h}deg, ${primaryColor.s - 6}%,  ${primaryColor.l + 8}%)`,
@@ -113,6 +115,9 @@ module.exports = {
       },
       backdropBlur: {
         xs: '2px',
+      },
+      backgroundImage: {
+        'gradient-conic-corner': 'conic-gradient(from 270deg at 25% 35%, var(--tw-gradient-stops))'
       }
     },
   },
