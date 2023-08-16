@@ -36,7 +36,7 @@ const cookieDescriptions = {
           service: 'Google Tag Manager',
           provider: 'Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland',
           purpose: 'Used in scripts and events.',
-          policy: 'https://policies.google.com/privacy',
+          policy: <TextLink href="https://policies.google.com/privacy">https://policies.google.com/privacy</TextLink>,
           cookies: ['_ga', '_gat', '_gid'],
           duration: ['2 years'],
         },
@@ -44,7 +44,7 @@ const cookieDescriptions = {
           service: 'Google Analytics',
           provider: 'Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland',
           purpose: 'Used for statistical data how the visitor uses the website.',
-          policy: 'https://policies.google.com/privacy',
+          policy: <TextLink href="https://policies.google.com/privacy">https://policies.google.com/privacy</TextLink>,
           cookies: ['_ga', '_gat', '_gid'],
           duration: ['2 months'],
         }
