@@ -1,0 +1,102 @@
+#!/bin/bash
+# Source https://engineering.resolvergroup.com/2021/10/rolling-back-aws-elastic-container-service-ecs-deployments/
+
+# Use paths relative to current directory
+#cd "$(dirname "$0")"
+
+# Perform interactive SSO profile creation or login
+#aws configure sso 
+#aws sso login --profile portfolio
+
+# Read config
+# AWS_PROFILE=example
+# ECR_URL=example
+# ECR_REPO=example
+# TASK_DEFINITION_FAMILY=example
+# ECS_CLUSTER=example
+# ECS_SERVICE=example
+source ./.env.bin
+
+######################## Build image and push to ECR ##############################
+
+unique_image_tag=$(git rev-parse --short HEAD) # $(date +%s)
+
+ecr_images=$(
+  aws ecr list-images \
+    --profile portfolio \
+    --repository-name $ECR_REPO
+)
+
+updated_image_exists_in_ecr=$(
+  echo "$ecr_images" | \
+  jq --arg IMAGE_TAG "$unique_image_tag" '.imageIds[] | contains(select(.imageTag==$IMAGE_TAG))'
+)
+
+# Skip build and push if image exists in ECR
+if [[ ! $updated_image_exists_in_ecr = "true" ]]; then
+  # Get credentials to push image
+  aws ecr get-login-password --profile $AWS_PROFILE | docker login --username AWS --password-stdin $ECR_URL
+
+  # Build image
+  docker build --tag "$ECR_URL/$ECR_REPO:$unique_image_tag" --tag "$ECR_URL/$ECR_REPO:latest" ../.
+
+  # Push images
+  docker push $ECR_URL/$ECR_REPO:$unique_image_tag
+  docker push $ECR_URL/$ECR_REPO:latest
+else
+  echo "Skipping build and push. Image already exists in remote repository."
+fi
+
+
+###################### Update task definition with new image ########################
+
+current_task_definition=$(
+  aws ecs describe-task-definition \
+    --profile $AWS_PROFILE \
+    --task-definition "$TASK_DEFINITION_FAMILY" \
+    --query '{
+      containerDefinitions: taskDefinition.containerDefinitions,
+      revision: taskDefinition.revision
+    }'
+)
+
+# Compare current and updated images
+current_image="$(echo "$current_task_definition" | jq .containerDefinitions[0].image)"
+updated_image="$ECR_URL/$ECR_REPO:$unique_image_tag"
+
+if [[ $current_image = "\"$updated_image\"" ]]; then
+  current_task_definition_revision="$(echo "$current_task_definition" | jq .revision)"
+
+  echo "Container image '$unique_image_tag' is already defined in latest task definition revision: $TASK_DEFINITION_FAMILY:$current_task_definition_revision"
+  read -p "Do you really want to deploy? (y/n)?" -n 1 -r
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    exit 1
+  fi
+fi
+ 
+# Register task defintion with new image
+updated_task_definition=$(
+  echo "$current_task_definition" | jq --arg CONTAINER_IMAGE "$updated_image" '.containerDefinitions[0].image = $CONTAINER_IMAGE'
+)
+updated_task_definition_result=$(
+  aws ecs register-task-definition \
+    --profile $AWS_PROFILE \
+    --cli-input-json "$updated_task_definition"
+)
+
+# Update service to use new task definition revision
+updated_task_defintion_revision=$(echo "$updated_task_definition_result" | jq .taskDefinition.revision)
+
+aws ecs update-service \
+  --profile $AWS_PROFILE \
+  --cluster $ECS_CLUSTER \
+  --service $ECS_SERVICE \
+  --task-definition "$TASK_DEFINITION_FAMILY:$updated_task_defintion_revision" \
+  > /dev/null
+
+
+################################ Invalidate CloudFront cache ###############################
+# aws cloudfront create-invalidation \
+#   --profile $AWS_PROFILE \
+#   --distribution-id $CLOUDFRONT_DISTRIBUTION \
+#   --paths "/*"
