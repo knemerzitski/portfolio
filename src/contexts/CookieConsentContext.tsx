@@ -29,7 +29,7 @@ const cookieDescriptions = {
         }
       ]
     },
-    /*analytics: {
+    analytics: {
       name: 'Analytics',
       cookies: [
         {
@@ -49,7 +49,7 @@ const cookieDescriptions = {
           duration: ['2 months'],
         }
       ]
-    },*/
+    },
     media: {
       name: 'External Media',
       cookies: [

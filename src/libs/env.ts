@@ -11,7 +11,7 @@ export const CONTACT_TO_ADDRESS =  process.env.CONTACT_TO_ADDRESS ?? 'kevin@knem
 export const NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY =  process.env.NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY;
 export const GRECAPTCHA3_SECRET_KEY =  process.env.GRECAPTCHA3_SECRET_KEY;
 
-
+export const NEXT_PUBLIC_GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 
 function isEnvVarTruthy(envVar: string | undefined, _default: boolean): boolean {
