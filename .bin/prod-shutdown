@@ -10,7 +10,7 @@ source ./.env.bin.local
 asg_desired_capacity=0
 asg_min_size=0
 asg_max_size=0
-
+ecs_task_count=0
 
 # Disable CloudFront
 distribution=$(
@@ -44,16 +44,16 @@ else
 fi
 
 
-# Update ECS Service desired task count to zero
-echo "Updating ECS service desired task count to 0"
+# Update ECS Service desired tasks count
+echo "Updating ECS service desired task count to $ecs_task_count"
 aws ecs update-service \
   --profile $AWS_PROFILE \
   --cluster $ECS_CLUSTER \
   --service $ECS_SERVICE \
-  --desired-count 0 \
+  --desired-count $ecs_task_count \
   > /dev/null
 
-# Update ASG to start instances
+# Update ASG size
 echo "Updating Auto Scaling Group $ASG (desired_capacity: $asg_desired_capacity, min_size: $asg_min_size, max_size: $asg_max_size)"
 aws autoscaling update-auto-scaling-group \
   --profile $AWS_PROFILE \

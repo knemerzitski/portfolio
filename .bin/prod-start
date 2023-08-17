@@ -12,7 +12,7 @@ asg_min_size=0
 asg_max_size=2
 ecs_task_count=1
 
-# Update ASG to start instances
+# Update ASG size
 echo "Updating Auto Scaling Group $ASG (desired_capacity: $asg_desired_capacity, min_size: $asg_min_size, max_size: $asg_max_size)"
 aws autoscaling update-auto-scaling-group \
   --profile $AWS_PROFILE \
