@@ -96,7 +96,7 @@ export const projects = [
     ),
     shortDesc: <p>
       Specialized WordPress plugin that accelerates client communication.
-      Easily request for a sauna project offer form predefined templates.
+      Easily request for a sauna project offer from predefined templates.
     </p>,
     desc: <>
       <p>
