@@ -1,29 +1,29 @@
 #!/bin/bash
+
 # Source https://engineering.resolvergroup.com/2021/10/rolling-back-aws-elastic-container-service-ecs-deployments/
 
-# Use paths relative to current directory
-#cd "$(dirname "$0")"
+
+# 1. Build docker image
+# 2. Upload image to ECR
+# 3. Update ECS task defintion with new image
+# 4. Invalidate CloudFront
 
 # Perform interactive SSO profile creation or login
 #aws configure sso 
 #aws sso login --profile portfolio
 
 # Read config
-# AWS_PROFILE=example
-# ECR_URL=example
-# ECR_REPO=example
-# TASK_DEFINITION_FAMILY=example
-# ECS_CLUSTER=example
-# ECS_SERVICE=example
 source ./.env.bin
+
 
 ######################## Build image and push to ECR ##############################
 
 unique_image_tag=$(git rev-parse --short HEAD) # $(date +%s)
 
+echo "Fetching existing ECR $ECR_REPO images"
 ecr_images=$(
   aws ecr list-images \
-    --profile portfolio \
+    --profile $AWS_PROFILE \
     --repository-name $ECR_REPO
 )
 
@@ -38,9 +38,11 @@ if [[ ! $updated_image_exists_in_ecr = "true" ]]; then
   aws ecr get-login-password --profile $AWS_PROFILE | docker login --username AWS --password-stdin $ECR_URL
 
   # Build image
-  docker build --tag "$ECR_URL/$ECR_REPO:$unique_image_tag" --tag "$ECR_URL/$ECR_REPO:latest" ../.
+  echo "Building image"
+  docker build --tag "$ECR_URL/$ECR_REPO:$unique_image_tag" --tag "$ECR_URL/$ECR_REPO:latest" .
 
   # Push images
+  echo "Pushing image to $ECR_URL/$ECR_REPO"
   docker push $ECR_URL/$ECR_REPO:$unique_image_tag
   docker push $ECR_URL/$ECR_REPO:latest
 else
@@ -50,15 +52,25 @@ fi
 
 ###################### Update task definition with new image ########################
 
+echo "Fetching current task definition $TASK_DEFINITION_FAMILY"
 current_task_definition=$(
   aws ecs describe-task-definition \
     --profile $AWS_PROFILE \
     --task-definition "$TASK_DEFINITION_FAMILY" \
     --query '{
       containerDefinitions: taskDefinition.containerDefinitions,
+      family: taskDefinition.family,
+      executionRoleArn: taskDefinition.executionRoleArn,
+      networkMode: taskDefinition.networkMode,
+      volumes: taskDefinition.volumes,
+      placementConstraints: taskDefinition.placementConstraints,
+      requiresCompatibilities: taskDefinition.requiresCompatibilities,
+      cpu: taskDefinition.cpu,
+      memory: taskDefinition.memory
       revision: taskDefinition.revision
     }'
 )
+
 
 # Compare current and updated images
 current_image="$(echo "$current_task_definition" | jq .containerDefinitions[0].image)"
@@ -73,20 +85,24 @@ if [[ $current_image = "\"$updated_image\"" ]]; then
     exit 1
   fi
 fi
- 
+
 # Register task defintion with new image
 updated_task_definition=$(
-  echo "$current_task_definition" | jq --arg CONTAINER_IMAGE "$updated_image" '.containerDefinitions[0].image = $CONTAINER_IMAGE'
+  echo "$current_task_definition" | \
+  jq --arg CONTAINER_IMAGE "$updated_image" '.containerDefinitions[0].image = $CONTAINER_IMAGE | del(.revision)'
 )
+echo "Updating task definition with new container image"
 updated_task_definition_result=$(
   aws ecs register-task-definition \
     --profile $AWS_PROFILE \
+    --family "$TASK_DEFINITION_FAMILY" \
     --cli-input-json "$updated_task_definition"
 )
 
 # Update service to use new task definition revision
 updated_task_defintion_revision=$(echo "$updated_task_definition_result" | jq .taskDefinition.revision)
 
+echo "Updating service with new task defintion revision $updated_task_defintion_revision"
 aws ecs update-service \
   --profile $AWS_PROFILE \
   --cluster $ECS_CLUSTER \
@@ -96,7 +112,9 @@ aws ecs update-service \
 
 
 ################################ Invalidate CloudFront cache ###############################
-# aws cloudfront create-invalidation \
-#   --profile $AWS_PROFILE \
-#   --distribution-id $CLOUDFRONT_DISTRIBUTION \
-#   --paths "/*"
+echo "Invalidating CloudFront distribution $CLOUDFRONT_DISTRIBUTION"
+aws cloudfront create-invalidation \
+  --profile $AWS_PROFILE \
+  --distribution-id $CLOUDFRONT_DISTRIBUTION \
+  --paths "/*" \
+  > /dev/null
