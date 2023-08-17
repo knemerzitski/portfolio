@@ -4,7 +4,8 @@
 # 1. Update ASG
 # 2. Disable CloudFront
 
-source ./.env.bin
+# Import env
+source ./.env.bin.local
 
 
 # Update ASG to start instances

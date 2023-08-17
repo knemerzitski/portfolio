@@ -12,8 +12,8 @@
 #aws configure sso 
 #aws sso login --profile portfolio
 
-# Read config
-source ./.env.bin
+# Import env
+source ./.env.bin.local
 
 
 ######################## Build image and push to ECR ##############################
