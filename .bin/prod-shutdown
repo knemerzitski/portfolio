@@ -7,20 +7,9 @@
 # Import env
 source ./.env.bin.local
 
-
-# Update ASG to start instances
 asg_desired_capacity=0
 asg_min_size=0
 asg_max_size=0
-
-echo "Updating Auto Scaling Group $ASG (desired_capacity: $asg_desired_capacity, min_size: $asg_min_size, max_size: $asg_max_size)"
-
-aws autoscaling update-auto-scaling-group \
-  --profile $AWS_PROFILE \
-  --auto-scaling-group-name $ASG \
-  --desired-capacity $asg_desired_capacity \
-  --min-size $asg_min_size \
-  --max-size $asg_max_size
 
 
 # Disable CloudFront
@@ -53,3 +42,24 @@ if [[ $is_distribution_config_enabled = true ]]; then
 else
   echo "CloudFront distribution $CLOUDFRONT_DISTRIBUTION is already disabled"
 fi
+
+
+# Update ECS Service desired task count to zero
+echo "Updating ECS service desired task count to 0"
+aws ecs update-service \
+  --profile $AWS_PROFILE \
+  --cluster $ECS_CLUSTER \
+  --service $ECS_SERVICE \
+  --desired-count 0 \
+  > /dev/null
+
+# Update ASG to start instances
+echo "Updating Auto Scaling Group $ASG (desired_capacity: $asg_desired_capacity, min_size: $asg_min_size, max_size: $asg_max_size)"
+aws autoscaling update-auto-scaling-group \
+  --profile $AWS_PROFILE \
+  --auto-scaling-group-name $ASG \
+  --desired-capacity $asg_desired_capacity \
+  --min-size $asg_min_size \
+  --max-size $asg_max_size
+
+

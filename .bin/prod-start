@@ -7,19 +7,28 @@
 # Import env
 source ./.env.bin.local
 
-# Update ASG to start instances
 asg_desired_capacity=1
 asg_min_size=0
 asg_max_size=2
+ecs_task_count=1
 
+# Update ASG to start instances
 echo "Updating Auto Scaling Group $ASG (desired_capacity: $asg_desired_capacity, min_size: $asg_min_size, max_size: $asg_max_size)"
-
 aws autoscaling update-auto-scaling-group \
   --profile $AWS_PROFILE \
   --auto-scaling-group-name $ASG \
   --desired-capacity $asg_desired_capacity \
   --min-size $asg_min_size \
-  --max-size $asg_max_size
+  --max-size $
+  
+# Update ECS Service desired tasks count
+echo "Updating ECS service desired task count to $ecs_task_count"
+aws ecs update-service \
+  --profile $AWS_PROFILE \
+  --cluster $ECS_CLUSTER \
+  --service $ECS_SERVICE \
+  --desired-count $ecs_task_count \
+  > /dev/null
 
 # Enable CloudFront
 distribution=$(
