@@ -76,7 +76,7 @@ export default function RootLayout({ children, }: { children: ReactNode, }) {
               <Content className="relative text-sm text-text/90 flex justify-between items-end gap-4">
                 <div className="max-w-xs lg:max-w-md">
                   &copy; Copyright 2023. Made by <TextLink className="inline" href="/">{portfolioName}</TextLink>
-                  <span> | <CookieConsentLink /></span>
+                  <span><CookieConsentLink prefix=" | " /></span>
                 </div>
                 <div className="max-w-xs text-end">
                   Built with <TextLink href="https://nextjs.org/">Next.js</TextLink> and
