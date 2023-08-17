@@ -16,7 +16,7 @@ import { ModalsContextProvider } from '@/contexts/ModalsContext';
 import Anchor from '@/components/nav/Anchor';
 import { Body } from '@/components/container/Body';
 import { HashContextProvider } from '@/contexts/HashContext';
-import { ConsentedGoogleTagManager } from '@/libs/gtm';
+import { GoogleTagManagerScript } from '@/libs/gtm';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -39,7 +39,7 @@ export default function RootLayout({ children, }: { children: ReactNode, }) {
           h-screen
       `}>
         <CookieConsentContextProvider>
-          <ConsentedGoogleTagManager />
+          <GoogleTagManagerScript />
 
           <ModalsContextProvider>
 
