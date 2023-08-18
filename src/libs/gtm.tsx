@@ -18,11 +18,14 @@ export function isEnabled() {
   return GTM_ID != null;
 }
 
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push('consent', 'default', {
-  'ad_storage': 'denied',
-  'analytics_storage': 'denied',
-});
+if (typeof window !== 'undefined') {
+  window.dataLayer = window.dataLayer || [];
+
+  window.dataLayer.push(['consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied',
+  }]);
+}
 
 export function GoogleTagManagerScript() {
   const cookieConsentContext = useCookieConsentContext();
@@ -31,13 +34,13 @@ export function GoogleTagManagerScript() {
   useEffect(() => {
     if (!window.dataLayer) return;
     console.log('gtm', `consent updated. analytics: ${hasAnalyticsConsent}`);
-    window.dataLayer.push('consent', 'default', hasAnalyticsConsent ? {
+    window.dataLayer.push(['consent', 'default', hasAnalyticsConsent ? {
       'ad_storage': 'granted',
       'analytics_storage': 'granted',
     } : {
       'ad_storage': 'denied',
       'analytics_storage': 'denied',
-    });
+    }]);
   }, [hasAnalyticsConsent])
 
   useEffect(() => {
@@ -66,8 +69,8 @@ function ScriptInjector() {
         {/* This code never runs due to consent requiring javascript. Must use cookies for consent for this to work */}
         <noscript dangerouslySetInnerHTML={{
           __html: `
-          <iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
-          height="0" width="0" style="display:none;visibility:hidden"></iframe><>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe><>
         `
         }} />
       </>
