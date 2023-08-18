@@ -24,7 +24,7 @@ export function GoogleTagManagerScript() {
   const pushGtmStartOnceRef = useRef(true);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !isEnabled()) return;
 
     window.dataLayer = window.dataLayer || [];
 
@@ -64,6 +64,8 @@ function ScriptInjector() {
         }} />
       </>
     );
+  }else{
+    console.log('gtm disabled');
   }
   return <></>;
 }
