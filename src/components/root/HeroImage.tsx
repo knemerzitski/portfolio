@@ -1,19 +1,36 @@
 import styles from './HeroImage.module.css';
 
-import Image from "next/image";
+import Image, { ImageProps, unstable_getImgProps as getImgProps } from "next/image";
 
-import portfolioHeroImg from '@/assets/images/hexagons-gear.webp'
+import desktopImg from '@/assets/images/hexagons-gear.webp';
+import mobileImg from '@/assets/images/hexagons-gear-mobile.webp';
 
 export default function HeroImage() {
+  const commonImgProps: Omit<ImageProps, 'src' | 'alt'> = {
+    className: 'absolute object-cover w-full h-full',
+    quality: 100,
+    placeholder: "blur",
+    sizes: "100vw",
+  };
+
+  // Extract srcset from image props using unstable Next feature
+  const { props: { srcSet: mobileSrcSet } } = getImgProps({
+    ...commonImgProps,
+    alt: '',
+    src: mobileImg
+  });
+
   return (
     <>
-      <Image priority
-        className="absolute object-cover w-full h-full"
-        quality={100}
-        src={portfolioHeroImg}
-        placeholder="blur"
-        sizes="100vw"
-        alt="Hexagon terrain, a big gear and wires under night sky" />
+      <picture>
+        <source media="(max-aspect-ratio: 9/16)" srcSet={mobileSrcSet} />
+        <Image
+          priority
+          src={desktopImg}
+          alt="Hexagon terrain, a big gear and wires under night sky"
+          {...commonImgProps}
+        />
+      </picture>
       <Particles />
     </>
   );
