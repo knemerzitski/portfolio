@@ -1,4 +1,5 @@
 .svg {
+  @apply motion-reduce:hidden;
   position: absolute;
   top: 0;
   left: 0;
