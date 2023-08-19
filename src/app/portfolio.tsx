@@ -11,6 +11,7 @@ import imgIsikregCardRegister from '@/assets/images/isikreg/personnel-registrati
 import imgIsikregInsertPerson from '@/assets/images/isikreg/personnel-registration-app-insert-person.webp';
 
 import Icon, { IconNames } from "@/components/info/Icon";
+import IntersectionSuspense from "@/components/container/IntersectionSuspense";
 
 
 export const name = 'Kevin Nemeržitksi';
@@ -190,32 +191,38 @@ export const projects = [
       </p>
     </>,
     hero: (
-      <iframe key="youtubeDemo" className={`
-        aspect-video w-full mx-auto
-      `}
-        src="https://www.youtube-nocookie.com/embed/syDuKJNU7PU"
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
-      </iframe>
+      <IntersectionSuspense className="aspect-video w-full mx-auto">
+        <iframe key="youtubeDemo" className={`
+          aspect-video w-full mx-auto
+        `}
+          loading="lazy"
+          src="https://www.youtube-nocookie.com/embed/syDuKJNU7PU"
+          title="YouTube video player"
+          allow="accelerometer; encrypted-media; gyroscope; web-share" allowFullScreen>
+        </iframe>
+      </IntersectionSuspense>
     ),
     categories: [
       {
         title: 'Short Demo',
         list: [
-          <iframe key="youtubeDemo" className={`
-        aspect-video w-full mx-auto
-      `}
-            src="https://www.youtube-nocookie.com/embed/syDuKJNU7PU"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
-          </iframe>,
+          <IntersectionSuspense key="youtubeDemo" className="aspect-video w-full mx-auto">
+            <iframe className={`
+              aspect-video w-full mx-auto
+            `}
+              loading="lazy"
+              src="https://www.youtube-nocookie.com/embed/syDuKJNU7PU"
+              title="YouTube video player"
+              allow="accelerometer; encrypted-media; gyroscope; web-share" allowFullScreen>
+            </iframe>
+          </IntersectionSuspense>
         ]
       },
       {
         title: 'Screenshots',
         list: [
           <Image key="mainPage" className="rounded" sizes="1024px" src={imgIsikregCardRegister} alt="Personnel Registration Application smartcard registration successful" />,
-          <Image key="cardRegister" className="rounded" sizes="1024px" src={imgIsikregInsertPerson} alt="Personnel Registration Application insert new person" />,
+        <Image key="cardRegister" className="rounded" sizes="1024px" src={imgIsikregInsertPerson} alt="Personnel Registration Application insert new person" />,
           <Image key="insertPerson" className="rounded" sizes=" 1024px" src={imgIsikregMain} alt="Personnel Registration Application initial view" />
         ]
       }
@@ -224,4 +231,4 @@ export const projects = [
       'Java', 'C#', 'PC/SC', 'JavaFX', 'WPF', 'XAML', 'Excel'
     ]
   }
-];
+];  
