@@ -33,7 +33,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { ReactNode, createContext, useContext, useEffect, useRef } from "react";
+import { ReactNode, createContext, useContext, useEffect, useRef, useCallback } from "react";
 
 interface Listeners {
   start: () => void,
@@ -55,6 +55,7 @@ interface HashContextInterface {
   pause: () => void,
   resume: () => void,
   isPaused: () => boolean,
+  push: (hash: string) => void,
 }
 
 const HashContext = createContext<HashContextInterface | null>(null);
@@ -74,52 +75,57 @@ export function HashContextProvider({
   const isPausedRef = useRef(false);
   const router = useRouter();
 
+
+  const handleHashChanged = useCallback((newHash: string) => {
+    if (newHash === currentHashRef.current) return;
+
+    // Check disabled
+    if (newHash in states.current) {
+      const currentState = states.current[newHash];
+      if (currentState.disabled) {
+        console.log('hashcontext', 'disabled', newHash);
+        router.replace(window.location.pathname + window.location.search, { scroll: false });
+        return;
+      }
+    }
+
+    prevHashRef.current = currentHashRef.current;
+    currentHashRef.current = newHash;
+    console.log('hashcontext', `change ${prevHashRef.current} => ${currentHashRef.current} (states: ${Object.keys(states.current).length})`);
+
+    if (isPausedRef.current) return;
+
+    // End prev
+    if (prevHashRef.current in states.current) {
+      const endState = states.current[prevHashRef.current];
+      if (endState.started) {
+        endState.started = false;
+        console.log('hashcontext', 'event end', prevHashRef.current);
+        endState.listeners.end();
+      }
+    }
+
+    //Start current
+    if (currentHashRef.current in states.current) {
+      const startState = states.current[currentHashRef.current];
+      if (!startState.started && !startState.disabled) {
+        startState.started = true;
+        console.log('hashcontext', 'event start', currentHashRef.current);
+        startState.listeners.start();
+      }
+    }
+  }, [router]);
+
   useEffect(() => {
-    function handleHashChanged() {
-      if (window.location.hash === currentHashRef.current) return;
-
-      // Check disabled
-      if (window.location.hash in states.current) {
-        const currentState = states.current[window.location.hash];
-        if (currentState.disabled) {
-          console.log('hashcontext', 'disabled', window.location.hash);
-          router.replace(window.location.pathname + window.location.search, {scroll: false});
-          return;
-        }
-      }
-
-      prevHashRef.current = currentHashRef.current;
-      currentHashRef.current = window.location.hash;
-      console.log('hashcontext', `change ${prevHashRef.current} => ${currentHashRef.current} (states: ${Object.keys(states.current).length})`);
-
-      if (isPausedRef.current) return;
-
-      // End prev
-      if (prevHashRef.current in states.current) {
-        const endState = states.current[prevHashRef.current];
-        if (endState.started) {
-          endState.started = false;
-          console.log('hashcontext', 'event end', prevHashRef.current);
-          endState.listeners.end();
-        }
-      }
-
-      //Start current
-      if (currentHashRef.current in states.current) {
-        const startState = states.current[currentHashRef.current];
-        if (!startState.started && !startState.disabled) {
-          startState.started = true;
-          console.log('hashcontext', 'event start', currentHashRef.current);
-          startState.listeners.start();
-        }
-      }
+    function onHashChanged() {
+      handleHashChanged(window.location.hash);
     };
 
-    handleHashChanged();
+    handleHashChanged(window.location.hash);
 
-    window.addEventListener('hashchange', handleHashChanged);
-    return () => window.removeEventListener('hashchange', handleHashChanged);
-  }, [router]);
+    window.addEventListener('hashchange', onHashChanged);
+    return () => window.removeEventListener('hashchange', onHashChanged);
+  }, [router, handleHashChanged]);
 
   const tasksContextInterface: HashContextInterface = {
     set(newHash: string, listeners: Listeners) {
@@ -159,7 +165,7 @@ export function HashContextProvider({
           router.back();
         } else {
           console.log('hashcontext', 'router replace');
-          router.replace(window.location.pathname + window.location.search, {scroll: false});
+          router.replace(window.location.pathname + window.location.search, { scroll: false });
         }
       }
     },
@@ -194,7 +200,7 @@ export function HashContextProvider({
     },
     disable(hash: string) {
       if (!(hash in states.current)) return;
-      
+
       const state = states.current[hash];
 
       if (state.disabled) return;
@@ -208,7 +214,7 @@ export function HashContextProvider({
       }
 
       if (currentHashRef.current === hash) {
-        router.replace(window.location.pathname + window.location.search, {scroll: false});
+        router.replace(window.location.pathname + window.location.search, { scroll: false });
       }
     },
     enable(hash: string) {
@@ -220,6 +226,9 @@ export function HashContextProvider({
       state.disabled = false;
 
       console.log('hashcontext', 'enabled', hash);
+    },
+    push(hash: string) {
+      handleHashChanged(hash);
     }
   }
 

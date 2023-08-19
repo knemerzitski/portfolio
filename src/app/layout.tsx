@@ -39,60 +39,62 @@ export default function RootLayout({ children, }: { children: ReactNode, }) {
           h-screen
       `}>
         <CookieConsentContextProvider>
-          <GoogleTagManagerScript />
+          <HashContextProvider>
+            <GoogleTagManagerScript />
 
-          <ModalsContextProvider>
+            <ModalsContextProvider>
 
-            <HashContextProvider>
+
               <HashTaskOpenCookieConsentModal />
               <NewVisitorOpenCookieConsentModal />
-            </HashContextProvider>
 
-            <TopNav />
 
-            <main className="min-h-screen">
-              {children}
-            </main>
+              <TopNav />
 
-            <footer className="bg-primary-800 pt-10 pb-4">
-              <Content>
-                <ul className="flex gap-6 justify-end">
-                  <li>
-                    <Anchor href={githubUrl}>
-                      <span className="sr-only">GitHub</span>
-                      <Icon type="github" className="w-auto h-6" />
-                    </Anchor>
+              <main className="min-h-screen">
+                {children}
+              </main>
 
-                  </li>
-                  <li>
-                    <address>
-                      <Anchor href={`mailto:${emailAddress}`}>
-                        <span className="sr-only">{emailAddress}</span>
-                        <Icon type="envelope" className="w-auto h-6 text-text hover:text-text" />
+              <footer className="bg-primary-800 pt-10 pb-4">
+                <Content>
+                  <ul className="flex gap-6 justify-end">
+                    <li>
+                      <Anchor href={githubUrl}>
+                        <span className="sr-only">GitHub</span>
+                        <Icon type="github" className="w-auto h-6" />
                       </Anchor>
-                    </address>
-                  </li>
-                </ul>
-              </Content>
 
-              <hr className="h-px mt-10 mb-10 bg-primary-50 border-0" />
-              <Content className="relative text-sm text-text/90 flex flex-col gap-2 justify-start">
-                <CookieConsentLink className="self-start">Update cookies</CookieConsentLink>
+                    </li>
+                    <li>
+                      <address>
+                        <Anchor href={`mailto:${emailAddress}`}>
+                          <span className="sr-only">{emailAddress}</span>
+                          <Icon type="envelope" className="w-auto h-6 text-text hover:text-text" />
+                        </Anchor>
+                      </address>
+                    </li>
+                  </ul>
+                </Content>
 
-                <div className="flex justify-between items-end gap-4">
-                  <div className="max-w-xs lg:max-w-md">
-                    &copy; Copyright 2023. Made by <TextLink className="inline" href="/">{portfolioName}</TextLink>
+                <hr className="h-px mt-10 mb-10 bg-primary-50 border-0" />
+                <Content className="relative text-sm text-text/90 flex flex-col gap-2 justify-start">
+                  <CookieConsentLink className="self-start">Update cookies</CookieConsentLink>
+
+                  <div className="flex justify-between items-end gap-4">
+                    <div className="max-w-xs lg:max-w-md">
+                      &copy; Copyright 2023. Made by <TextLink className="inline" href="/">{portfolioName}</TextLink>
+                    </div>
+
+                    <div className="max-w-xs text-end">
+                      Built with <TextLink href="https://nextjs.org/">Next.js</TextLink> and
+                      deployed in <TextLink href="https://aws.amazon.com/">AWS</TextLink>.
+                    </div>
                   </div>
+                </Content>
+              </footer>
 
-                  <div className="max-w-xs text-end">
-                    Built with <TextLink href="https://nextjs.org/">Next.js</TextLink> and
-                    deployed in <TextLink href="https://aws.amazon.com/">AWS</TextLink>.
-                  </div>
-                </div>
-              </Content>
-            </footer>
-
-          </ModalsContextProvider>
+            </ModalsContextProvider>
+          </HashContextProvider>
         </CookieConsentContextProvider>
       </Body>
     </html >

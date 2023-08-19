@@ -1,15 +1,6 @@
 @tailwind base;
 
 @layer base {
-  :root {
-    /* ####################### Global Variables ######################## */
-    /* --scrollbar-width: 17px; */
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
   /* Consistent outline */
   a:focus-visible,
   a:focus-visible svg:not(.no-a-outline) {
@@ -48,7 +39,7 @@
 
 @layer components {
   .scroll-hidden::-webkit-scrollbar {
-    display:none;
+    display: none;
   }
 }
 
