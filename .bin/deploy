@@ -112,6 +112,12 @@ aws ecs update-service \
   > /dev/null
 
 
+echo "Waiting for service to be stable before invalidating CloudFront distribution"
+aws ecs wait services-stable \
+  --profile $AWS_PROFILE \
+  --cluster $ECS_CLUSTER \
+  --services $ECS_SERVICE
+
 ################################ Invalidate CloudFront cache ###############################
 echo "Invalidating CloudFront distribution $CLOUDFRONT_DISTRIBUTION"
 aws cloudfront create-invalidation \
