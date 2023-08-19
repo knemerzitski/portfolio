@@ -27,6 +27,8 @@ export function CheckBox({
         focus-visible:outline-secondary-500
         checked:focus-visible:outline-secondary-300
 
+        checked:after:text-secondary-600
+
         ${className}
       `}
         type="checkbox"
@@ -47,7 +49,6 @@ export function CheckBox({
           transform: translate(-50%,-50%);
           font-size: 1em;
           content: "${HEAVY_CHECK_MARK}";
-          color: theme("colors.secondary.600");
         }
       `}</style>
     </>
