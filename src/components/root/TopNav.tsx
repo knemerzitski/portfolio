@@ -12,6 +12,7 @@ import { name as portfolioName, resumeUrl, resumeVersion } from '@/app/portfolio
 const links: NavLink[] = [
   {
     href: '/',
+    id: 'home',
     innerNode: 'Home'
   },
   {

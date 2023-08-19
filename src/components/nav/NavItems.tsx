@@ -5,6 +5,7 @@ import Anchor from "@/components/nav/Anchor";
 
 export interface NavLink {
   href: string,
+  id?: string,
   as?: string,
   innerNode: ReactNode,
 }
@@ -51,10 +52,10 @@ export default function NavItems({
   // Select focused section with most height visible on screen
   useEffect(() => {
     const sectionEls: Element[] = [];
-    for (const { href } of links) {
-      const id = getHashValueFromHref(href);
-      if (id) {
-        const el = document.getElementById(id);
+    for (const { href, id } of links) {
+      const elId = id ?? getHashValueFromHref(href);
+      if (elId) {
+        const el = document.getElementById(elId);
         if (el) {
           sectionEls.push(el);
         }
@@ -91,7 +92,7 @@ export default function NavItems({
 
   let activeNavIndex = -1;
   if (focusedSectionId) {
-    activeNavIndex = links.findIndex((n) => n.href.endsWith(focusedSectionId));
+    activeNavIndex = links.findIndex((n) => n.id === focusedSectionId || n.href.endsWith(focusedSectionId));
   }
 
   return (
