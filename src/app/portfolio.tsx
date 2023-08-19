@@ -12,11 +12,12 @@ import imgIsikregInsertPerson from '@/assets/images/isikreg/personnel-registrati
 
 import Icon, { IconNames } from "@/components/info/Icon";
 
+
 export const name = 'Kevin Nemeržitksi';
 export const title = 'Software Engineer';
 
 export const metaTitle = name;
-export const metaDescription = `${name} is a ${title.toLowerCase()} who loves problem-solving and spend his time around technology.`;
+export const metaDescription = `${name} is a ${title.toLowerCase()} who loves problem-solving and spending his time around technology.`;
 
 export const resumeUrl = '/resume.pdf';
 export const resumeVersion = '1';
