@@ -61,6 +61,7 @@ current_task_definition=$(
       containerDefinitions: taskDefinition.containerDefinitions,
       family: taskDefinition.family,
       executionRoleArn: taskDefinition.executionRoleArn,
+      taskRoleArn: taskDefinition.taskRoleArn,
       networkMode: taskDefinition.networkMode,
       volumes: taskDefinition.volumes,
       placementConstraints: taskDefinition.placementConstraints,
