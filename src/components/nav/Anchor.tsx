@@ -10,7 +10,7 @@ const canScrollIntoView = typeof document !== 'undefined' && typeof document.bod
 
 export default function Anchor({ children, href, ...restProps }: AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps) {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '/';
   const hashContext = useHashContext();
 
   function handleOnClick(e: MouseEvent<HTMLAnchorElement>) {
