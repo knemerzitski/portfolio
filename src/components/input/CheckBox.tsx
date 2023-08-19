@@ -1,11 +1,10 @@
-import styles from './Checkbox.module.css';
-
 import { InputHTMLAttributes } from "react";
-
 
 type CheckBoxProps = {
   label: string,
 } & InputHTMLAttributes<HTMLInputElement>;
+
+const HEAVY_CHECK_MARK = '\\2714';
 
 export function CheckBox({
   label,
@@ -13,7 +12,6 @@ export function CheckBox({
   ...restProps
 }: CheckBoxProps) {
   const id = `checkbox-${label}`;
-  
   return (
     <>
       <input id={id} className={`
@@ -29,32 +27,29 @@ export function CheckBox({
         focus-visible:outline-secondary-500
         checked:focus-visible:outline-secondary-300
 
-        ${styles.checkbox}
-
         ${className}
       `}
         type="checkbox"
         {...restProps}
       />
       <label className="pl-2 hover:cursor-pointer" htmlFor={id}>{label}</label>
+      <style jsx>{`
+        input {
+          appearance: none;
+          width: 1.25em;
+          height: 1.25em;
+        }
+
+        input:checked::after {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          font-size: 1em;
+          content: "${HEAVY_CHECK_MARK}";
+          color: theme("colors.secondary.600");
+        }
+      `}</style>
     </>
   );
 }
-
-// input[type="checkbox"] {
-//   @apply 
-//     appearance-none 
-//     relative
-//     inline-block
-//     rounded-sm
-//     p-2
-//     border border-solid border-text/80;
-// }
-
-// input[type="checkbox"]:checked {
-//   @apply border-secondary-600;
-// }
-
-// input[type="checkbox"]:checked::after {
-//   content: '\2714';
-// }

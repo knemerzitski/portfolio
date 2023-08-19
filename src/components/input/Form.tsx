@@ -12,7 +12,9 @@ import {
   BrandingVisiblity as GrecaptchaBrandingVisibility
 } from '@/libs/grecaptcha';
 import { useCookieConsentContext } from '@/contexts/CookieConsentContext';
-import Loader from '@/components/info/Loader';
+import dynamic from 'next/dynamic';
+
+const Loader = dynamic(() => import('@/components/info/Loader'));
 
 interface FormProps {
   action: string, // Used for Grecaptcha action

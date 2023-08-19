@@ -1,7 +1,5 @@
 "use client";
 
-import styles from './TopNav.module.css';
-
 import { useState } from 'react';
 
 import Icon from '@/components/info/Icon';
@@ -53,15 +51,16 @@ export default function TopNav() {
       {/* Using checkbox so that burger menu works without javascript too */}
       <input type="checkbox" id={topNavId}
         onChange={() => setMobileNavOpen(!isMobileNavOpen)}
-        checked={isMobileNavOpen} className={styles.checkbox} hidden
+        checked={isMobileNavOpen} className="checkbox" hidden
       />
       {/* OVERLAY ON MOBILE MENU OPEN */}
       <label htmlFor={topNavId} className={`
+        overlay
+        
         fixed w-full h-full
         bg-overlay/50
         z-10
         invisible md:hidden
-        ${styles.overlay}
       `}></label>
 
       <header className="
@@ -70,12 +69,13 @@ export default function TopNav() {
 
         {/* DESKTOP & MOBILE WITH ICON */}
         <div className={`
+          mainNav
+
           px-6 md:px-10
 
           bg-primary-800/95
           backdrop-blur-xs
           shadow-dp24 shadow-black/40
-          ${styles.mainNav}
         `}>
           <div className="
             max-w-screen-lg mx-auto
@@ -103,11 +103,11 @@ export default function TopNav() {
               block md:hidden
             `}>
               <div className="w-5 h-5">
-                <div className={`absolute visible ${styles.openIcon}`}>
+                <div className={`openIcon absolute visible`}>
                   <span className="sr-only">Open Menu</span>
                   <Icon type="bars" className="w-auto h-5" />
                 </div>
-                <div className={`absolute invisible ${styles.closeIcon}`}>
+                <div className={`closeIcon absolute invisible`}>
                   <span className="sr-only">Close Menu</span>
                   <Icon type="xmark" className="w-auto h-5" />
                 </div>
@@ -123,12 +123,14 @@ export default function TopNav() {
 
         {/* MOBILE STACK MENU */}
         <div className={`
+          mobileMenu
+
           absolute w-[95%] 
           bg-primary-800
           border border-solid border-transparent border-t-primary-950 
           shadow-dp6 shadow-shadow/60
           md:hidden -z-10
-          invisible ${styles.mobileMenu}
+          invisible 
         `}>
 
           {/* MOBILE NAV */}
@@ -144,6 +146,47 @@ export default function TopNav() {
 
         </div>
       </header>
+
+      <style jsx>{`
+        .overlay {
+          transition: all .2s linear, width 0s linear, height 0s linear;
+          opacity: 0;
+        }
+        .checkbox:checked ~ .overlay {
+          visibility: visible;
+          opacity: 1;
+        }
+        
+        .checkbox ~ header > .mainNav {
+          transition: box-shadow .25s ease;
+        }
+        
+        .checkbox:checked ~ header > .mainNav {
+          transition-duration: .1s;
+          --tw-shadow-color: transparent;
+        }
+        
+        .checkbox ~ header .mobileMenu {
+          transition: all .25s ease;
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        
+        .checkbox:checked ~ header .mobileMenu {
+          transition-duration: .1s;
+          transform: translateY(0%);
+          opacity: 1;
+          visibility: visible;
+        }
+        
+        .checkbox:checked ~ header .openIcon {
+          visibility: hidden;
+        }
+        
+        .checkbox:checked ~ header .closeIcon {
+          visibility: visible;
+        }
+    `}</style>
     </>
   );
 }
