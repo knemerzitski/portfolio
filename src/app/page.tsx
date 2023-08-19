@@ -131,7 +131,7 @@ export default function HomePage() {
                     </ul>
                     <CallToActionButton
                       className="whitespace-nowrap"
-                      href={`/projects/${project.slug}`}>
+                      href={`/project/${project.slug}`}>
                       Project Page
                     </CallToActionButton>
                   </div>
