@@ -19,7 +19,7 @@ aws autoscaling update-auto-scaling-group \
   --auto-scaling-group-name $ASG \
   --desired-capacity $asg_desired_capacity \
   --min-size $asg_min_size \
-  --max-size $
+  --max-size $asg_max_size
   
 # Update ECS Service desired tasks count
 echo "Updating ECS service desired task count to $ecs_task_count"
