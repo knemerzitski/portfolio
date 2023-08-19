@@ -3,7 +3,7 @@
 
 import Button, { SecondaryButton } from "@/components/input/Button";
 import { CheckBox } from "@/components/input/CheckBox";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, ReactNode, useEffect, useRef, useState } from "react";
 import Modal, { ModalProps } from "@/components/container/Modal";
 import { COOKIES, useCookieConsentContext } from "@/contexts/CookieConsentContext";
 import Accordion from "@/components/nav/Accordion";
@@ -254,7 +254,7 @@ export default function CookieConsentModal({
   );
 }
 
-export function CookieConsentLink({ prefix = '', suffix = '' }: { prefix?: string, suffix?: string }) {
+export function CookieConsentLink({ children, className = '' }: { children: ReactNode, className?: string }) {
   const [isJsDisabled, setIsJsDisabled] = useState(true);
 
   useEffect(() => {
@@ -264,9 +264,7 @@ export function CookieConsentLink({ prefix = '', suffix = '' }: { prefix?: strin
 
   return (
     !isJsDisabled && <>
-      {prefix}
-      <TextLink className="inline" href={COOKIE_CONSENT_MODAL_HASH}>Cookies</TextLink>
-      {suffix}
+      <TextLink className={className} href={COOKIE_CONSENT_MODAL_HASH}>{children}</TextLink>
     </>
   );
 }
