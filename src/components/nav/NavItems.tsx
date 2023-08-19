@@ -2,6 +2,7 @@
 
 import { MouseEventHandler, ReactNode, useEffect, useState } from "react";
 import Anchor from "@/components/nav/Anchor";
+import { usePathname } from "next/navigation";
 
 export interface NavLink {
   href: string,
@@ -48,6 +49,7 @@ export default function NavItems({
   onNavLinkClick?: MouseEventHandler<HTMLAnchorElement>
 }) {
   const [focusedSectionId, setFocusedSectionId] = useState<string>();
+  const pathname = usePathname();
 
   // Select focused section with most height visible on screen
   useEffect(() => {
@@ -88,7 +90,7 @@ export default function NavItems({
       window.removeEventListener('scroll', updateMostVisibleSectionId)
       window.removeEventListener('resize', updateMostVisibleSectionId);
     };
-  }, [links]);
+  }, [links, pathname]);
 
   let activeNavIndex = -1;
   if (focusedSectionId) {
