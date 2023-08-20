@@ -191,7 +191,11 @@ export const projects = [
       </p>
     </>,
     hero: (
-      <IntersectionSuspense className="aspect-video w-full mx-auto" rootMargin="200px">
+      <IntersectionSuspense className="aspect-video w-full mx-auto" rootMargin="200px"
+        fallback={(
+          <Image key="mainPage" className="object-cover object-top w-full h-full rounded" sizes="(max-width: 768px) 100vw, 512px" src={imgIsikregCardRegister}
+            alt="Personnel Registration Application smartcard registration successful" />
+        )}>
         <iframe key="youtubeDemo" className={`
           aspect-video w-full mx-auto
         `}
@@ -206,7 +210,7 @@ export const projects = [
       {
         title: 'Short Demo',
         list: [
-          <IntersectionSuspense key="youtubeDemo" className="aspect-video w-full mx-auto" rootMargin="200px">
+          <IntersectionSuspense key="youtubeDemo" className="aspect-video w-full mx-auto bg-black"rootMargin="200px">
             <iframe className={`
               aspect-video w-full mx-auto
             `}
@@ -222,7 +226,7 @@ export const projects = [
         title: 'Screenshots',
         list: [
           <Image key="mainPage" className="rounded" sizes="1024px" src={imgIsikregCardRegister} alt="Personnel Registration Application smartcard registration successful" />,
-        <Image key="cardRegister" className="rounded" sizes="1024px" src={imgIsikregInsertPerson} alt="Personnel Registration Application insert new person" />,
+          <Image key="cardRegister" className="rounded" sizes="1024px" src={imgIsikregInsertPerson} alt="Personnel Registration Application insert new person" />,
           <Image key="insertPerson" className="rounded" sizes=" 1024px" src={imgIsikregMain} alt="Personnel Registration Application initial view" />
         ]
       }
