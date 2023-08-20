@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Stop AWS services to disable production
 # 1. Update ASG

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Source https://engineering.resolvergroup.com/2021/10/rolling-back-aws-elastic-container-service-ecs-deployments/
 

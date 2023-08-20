@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Start AWS services to enable production
 # 1. Update ASG
