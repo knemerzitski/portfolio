@@ -191,7 +191,7 @@ export const projects = [
       </p>
     </>,
     hero: (
-      <IntersectionSuspense className="aspect-video w-full mx-auto">
+      <IntersectionSuspense className="aspect-video w-full mx-auto" rootMargin="200px">
         <iframe key="youtubeDemo" className={`
           aspect-video w-full mx-auto
         `}
@@ -206,7 +206,7 @@ export const projects = [
       {
         title: 'Short Demo',
         list: [
-          <IntersectionSuspense key="youtubeDemo" className="aspect-video w-full mx-auto">
+          <IntersectionSuspense key="youtubeDemo" className="aspect-video w-full mx-auto" rootMargin="200px">
             <iframe className={`
               aspect-video w-full mx-auto
             `}

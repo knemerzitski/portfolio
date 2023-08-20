@@ -1,30 +1,37 @@
 // Load component only when visible on screen
 "use client";
 
-import { ComponentPropsWithRef, ElementType, useRef } from 'react'
-import useIntersectionObserver from '@react-hook/intersection-observer'
+import { ComponentPropsWithRef, ElementType, useEffect, useRef, useState } from 'react'
+import useHasIntersected from '@/hooks/useHasIntersected';
 
 type Props<C extends ElementType> = {
   as?: C,
+  rootMargin?: string,
 } & ComponentPropsWithRef<C>
 
 
 export default function IntersectionSuspense<C extends ElementType = 'div'>({
   as = 'div',
+  rootMargin,
   children,
   ...restProps
 }: Props<C>) {
+  const [isJsDisabled, setIsJsDisabled] = useState(true);
   const containerRef = useRef(null);
-  const hasIntersectedRef = useRef(false);
-  const { isIntersecting } = useIntersectionObserver(containerRef)
-  if (!hasIntersectedRef.current && isIntersecting) {
-    hasIntersectedRef.current = true;
-  }
+  const hasIntersected = useHasIntersected(containerRef, {
+    rootMargin,
+  });
+
+  useEffect(() => {
+    setIsJsDisabled(false);
+  }, []);
+
+  const canRender = isJsDisabled || hasIntersected;
 
   const Component = as;
   return (
     <Component ref={containerRef} {...restProps}>
-      {hasIntersectedRef.current && children}
+      {canRender && children}
     </Component>
   )
 }
