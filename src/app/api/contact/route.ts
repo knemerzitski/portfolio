@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         success: false,
         code: 'spam',
-      }, { status: 400 });
+      });
     }
   }
 
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
       success: false,
       code: 'validation-error',
       error: validationErrors,
-    }, { status: 422 });
+    });
   }
 
   const contactForm = {
@@ -115,7 +115,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: false,
       code: 'email-error',
-    }, { status: 503 });
+    });
   }
 }
 

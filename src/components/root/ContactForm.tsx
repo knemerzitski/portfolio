@@ -22,15 +22,29 @@ export default function ContactForm() {
   }
 
   function handleError(code: string): ReactNode {
-    console.log(`Contact form error code: ${code}`)
-    return (
-      <>
-        Oops! Something went wrong. You can email me directly at&nbsp;
-        <TextLink className='font-bold' href={`mailto:${emailAddress}`}>
-          {emailAddress}
-        </TextLink>
-      </>
+    console.log(`Contact form error code: ${code}`);
+
+    const emailLink = (
+      <TextLink className='font-bold' href={`mailto:${emailAddress}`}>
+        {emailAddress}
+      </TextLink>
     );
+
+    switch (code) {
+      case 'spam':
+        return (
+          <>
+            Are you a real robot (spam)? Please email me directly at {emailLink}
+          </>
+        );
+        break;
+      default:
+        return (
+          <>
+            Oops! Something went wrong. You can email me directly at {emailLink}
+          </>
+        );
+    }
   }
 
   function renderStatusMessage() {
