@@ -18,7 +18,7 @@ declare const grecaptcha: Grecaptcha | undefined;
 const SITE_KEY = NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY;
 const SECRET_KEY = GRECAPTCHA3_SECRET_KEY;
 
-const GOOD_SCORE = 0.5;
+const GOOD_SCORE = 0.3;
 const VERIFY_URL = 'https://www.recaptcha.net/recaptcha/api/siteverify';
 const API_URL = `https://www.recaptcha.net/recaptcha/api.js?render=${SITE_KEY}`;
 
