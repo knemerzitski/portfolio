@@ -11,7 +11,7 @@ const HeroParticles = dynamic(() => import('@/components/root/HeroParticles'));
 export default function HeroImage() {
   const commonImgProps: Omit<ImageProps, 'src' | 'alt'> = {
     className: 'absolute object-cover w-full h-full',
-    quality: 100,
+    quality: 99,
     placeholder: "blur",
     sizes: "100vw",
   };
