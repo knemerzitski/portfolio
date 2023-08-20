@@ -70,6 +70,8 @@ export default function Form({
   const cookieConsentContext = useCookieConsentContext();
   const [hasSpamProtectionConsent, setHasSpamProtectionConsent] = useState(false);
 
+  const focusedNameRef = useRef<string | null>(null);
+
   // Using useEffect to set 'hasSpamProtectionConsent' as otherwise it might be different during hydration
   useEffect(() => {
     setHasSpamProtectionConsent(cookieConsentContext?.getConsent()?.spam ?? false);
@@ -88,11 +90,9 @@ export default function Form({
   });
 
   const isFormDisabled = disabled || isSubmitting;
-  const focusInputName = Object.keys(inputValidationErrors).find(key => inputValidationErrors[key]) ?? null;
 
   function handleInputChanged(name: string, value: string) {
     setFormValues({ ...formValues, [name]: value });
-    setInputValidationErrors({ ...inputValidationErrors, [name]: '' });
     setActivatedInputs({ ...activatedInputs, [name]: true });
     setStatusMessage(DEFAULT_STATUS_MESSAGE);
   }
@@ -120,6 +120,9 @@ export default function Form({
           });
         }
         setInputValidationErrors(validationError);
+        
+        focusedNameRef.current = Object.keys(validationError).find(key => validationError[key]) ?? null;
+
         return;
       }
     }
@@ -272,7 +275,14 @@ export default function Form({
     const value = formValues[name];
     const label = input.label + (input.attributes.required ? '*' : '');
     const placeholder = input.label;
-    const focus = name === focusInputName;
+    const focus = name === focusedNameRef.current;
+
+    function handleOnFocus(){
+      if(focus){
+        // Focus only once
+        focusedNameRef.current = null;
+      }
+    }
 
     let validationMessage = '';
     if (inputValidationErrors[name]) {
@@ -295,6 +305,7 @@ export default function Form({
             disabled={isFormDisabled}
             message={validationMessage}
             placeholder={placeholder}
+            onFocus={handleOnFocus}
             focus={focus}
             {...input.attributes}
           />
@@ -310,6 +321,7 @@ export default function Form({
             disabled={isFormDisabled}
             message={validationMessage}
             placeholder={placeholder}
+            onFocus={handleOnFocus}
             focus={focus}
             {...input.attributes}
           />
