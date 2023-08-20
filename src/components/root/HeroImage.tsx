@@ -1,8 +1,8 @@
 
 import Image, { ImageProps, unstable_getImgProps as getImgProps } from "next/image";
 
-import desktopImg from '@/assets/images/hexagons-gear.webp';
-import mobileImg from '@/assets/images/hexagons-gear-mobile.webp';
+import desktopImg from '@/assets/images/hexagons-gear-night-sky.webp';
+import mobileImg from '@/assets/images/hexagons-gear-night-sky-mobile.webp';
 
 import dynamic from "next/dynamic";
 
@@ -30,7 +30,7 @@ export default function HeroImage() {
         <Image
           priority
           src={desktopImg}
-          alt="Hexagon terrain, a big gear and wires under night sky"
+          alt="Hexagon terrain, a big gear in night starry sky"
           {...commonImgProps}
         />
       </picture>
