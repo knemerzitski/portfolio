@@ -210,7 +210,7 @@ export const projects = [
       {
         title: 'Short Demo',
         list: [
-          <IntersectionSuspense key="youtubeDemo" className="aspect-video w-full mx-auto bg-black"rootMargin="200px">
+          <IntersectionSuspense key="youtubeDemo" className="aspect-video w-full mx-auto bg-black" rootMargin="200px">
             <iframe className={`
               aspect-video w-full mx-auto
             `}
