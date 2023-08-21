@@ -4,6 +4,9 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+    images: {
+    deviceSizes: [640, 768, 1080, 1280, 1536, 1920, 3840],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
