@@ -11,7 +11,7 @@ source ./.env.bin.local
 asg_desired_capacity=1
 asg_min_size=0
 asg_max_size=2
-ecs_task_count=1
+ecs_task_count=2
 
 # Update ASG size
 echo "Updating Auto Scaling Group $ASG (desired_capacity: $asg_desired_capacity, min_size: $asg_min_size, max_size: $asg_max_size)"
