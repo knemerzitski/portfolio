@@ -6,7 +6,7 @@ import mobileImg from '@/assets/images/hexagons-gear-night-sky-mobile.webp';
 
 import dynamic from "next/dynamic";
 
-const HeroParticles = dynamic(() => import('@/components/root/HeroParticles'));
+const HeroParticles = dynamic(() => import('./HeroParticles'));
 
 export default function HeroImage() {
   const commonImgProps: Omit<ImageProps, 'src' | 'alt'> = {

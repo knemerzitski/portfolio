@@ -6,9 +6,9 @@ import CallToActionButton from '@/components/nav/CallToAction';
 import Section from '@/components/container/Section';
 import Content from '@/components/container/Content';
 import Icon from '@/components/info/Icon';
-import ContactForm from '@/components/root/ContactForm';
+import ContactForm from '@/app/content/ContactForm';
 import Anchor from '@/components/nav/Anchor';
-import HeroImage from '@/components/root/HeroImage';
+import HeroImage from '@/app/content/HeroImage';
 
 import {
   name as portfolioName,

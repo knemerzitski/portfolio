@@ -3,7 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import TopNav from '@/components/root/TopNav';
+import TopNav from '@/app/content/TopNav';
 
 import Icon from '@/components/info/Icon';
 import TextLink from '@/components/nav/TextLink';
@@ -11,7 +11,7 @@ import Content from '@/components/container/Content';
 import { metaTitle, metaDescription, githubUrl, emailAddress, name as portfolioName } from '@/app/portfolio';
 import { CookieConsentContextProvider } from '@/contexts/CookieConsentContext';
 import { ReactNode } from 'react';
-import { CookieConsentLink, HashTaskOpenCookieConsentModal, NewVisitorOpenCookieConsentModal } from '@/components/root/CookieConsentModal';
+import { CookieConsentLink, HashTaskOpenCookieConsentModal, NewVisitorOpenCookieConsentModal } from '@/app/content/CookieConsentModal';
 import { ModalsContextProvider } from '@/contexts/ModalsContext';
 import Anchor from '@/components/nav/Anchor';
 import { Body } from '@/components/container/Body';
