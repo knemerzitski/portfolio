@@ -1,27 +1,28 @@
 "use client";
+import classNames from 'classnames';
 
 export default function HeroParticles() {
   const particles = [
     {
-      className: `
-        [--particle-offset:0]
-        [--circle-offset:0]
-        [--eight-offset:0]
-      `,
+      className: classNames(
+        '[--particle-offset:0]',
+        '[--circle-offset:0]',
+        '[--eight-offset:0]',
+      ),
     },
     {
-      className: `
-        [--particle-offset:0.33]
-        [--circle-offset:0.2]
-        [--eight-offset:0.5]
-      `,
+      className: classNames(
+        '[--particle-offset:0.33]',
+        '[--circle-offset:0.2]',
+        '[--eight-offset:0.5]',
+      ),
     },
     {
-      className: `
-        [--particle-offset:0.66]
-        [--circle-offset:0.1]
-        [--eight-offset:0.8]
-      `
+      className: classNames(
+        '[--particle-offset:0.66]',
+        '[--circle-offset:0.1]',
+        '[--eight-offset:0.8]',
+      ),
     }
   ];
 
@@ -55,7 +56,7 @@ export function Particle(
 
   return (
     <>
-      <g className={`particleRoot ${className}`}>
+      <g className={classNames('particleRoot', className)}>
         <g className="xCircleAnim"><g className="yCircleAnim">
           <g className="xShape8Anim"><g className="yShape8Anim">
             <g className="moveAroundGearAnim">

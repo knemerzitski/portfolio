@@ -13,6 +13,8 @@ import imgIsikregInsertPerson from '@/assets/images/isikreg/personnel-registrati
 import Icon, { IconNames } from "@/components/info/Icon";
 import YouTubeBlocker from "@/components/container/YouTubeBlocker";
 
+import classNames from 'classnames';
+
 
 export const name = 'Kevin Nemeržitksi';
 export const title = 'Software Engineer';
@@ -115,9 +117,9 @@ export const projects = [
       </p>
     </>,
     hero: (
-      <Image key="mainPage" className={`
-        object-cover object-top w-full h-full rounded
-      `}
+      <Image key="mainPage" className={classNames(
+        'object-cover object-top w-full h-full rounded'
+      )}
         sizes="(max-width: 768px) 100vw, 512px"
         src={imgShCnfMain} alt="Saunahouse Configurator main page" />
     ),

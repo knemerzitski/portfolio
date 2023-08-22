@@ -17,6 +17,7 @@ import Anchor from '@/components/nav/Anchor';
 import { Body } from '@/components/container/Body';
 import { HashContextProvider } from '@/contexts/HashContext';
 import { GoogleTagManagerScript } from '@/libs/gtm';
+import classNames from 'classnames';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,12 +33,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children, }: { children: ReactNode, }) {
   return (
     <html lang="en">
-      <Body className={`
-        ${inter.className}
-          text-text
-          bg-background
-          h-screen
-      `}>
+      <Body className={classNames(
+        inter.className,
+        'text-text',
+        'bg-background',
+        'h-screen'
+      )}>
         <CookieConsentContextProvider>
           <HashContextProvider>
             <GoogleTagManagerScript />

@@ -14,6 +14,8 @@ import {
 import { useCookieConsentContext } from '@/contexts/CookieConsentContext';
 import dynamic from 'next/dynamic';
 
+import classNames from 'classnames';
+
 const Loader = dynamic(() => import('@/components/info/Loader'));
 
 interface FormProps {
@@ -120,7 +122,7 @@ export default function Form({
           });
         }
         setInputValidationErrors(validationError);
-        
+
         focusedNameRef.current = Object.keys(validationError).find(key => validationError[key]) ?? null;
 
         return;
@@ -277,8 +279,8 @@ export default function Form({
     const placeholder = input.label;
     const focus = name === focusedNameRef.current;
 
-    function handleOnFocus(){
-      if(focus){
+    function handleOnFocus() {
+      if (focus) {
         // Focus only once
         focusedNameRef.current = null;
       }
@@ -340,21 +342,21 @@ export default function Form({
         ))}
         <div className='col-span-12 text-end mt-2 flex gap-8 justify-end items-center'>
           {statusMessage.value &&
-            <div className={`text-base sm:text-lg ${!statusMessage.isError ? 'text-secondary-500' : 'text-danger-500'}`}>
+            <div className={classNames('text-base sm:text-lg', !statusMessage.isError ? 'text-secondary-500' : 'text-danger-500')}>
               {statusMessage.value}
             </div>
           }
 
           <Button type='submit' disabled={isFormDisabled}>
             <div className="relative">
-              <span className={`${isSubmitting ? 'invisible' : 'visible'}`}>
+              <span className={classNames(isSubmitting ? 'invisible' : 'visible')}>
                 Send
               </span>
-              <div className={`
-                absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 
-                text-4xl
-                ${isSubmitting ? '' : 'hidden'}
-              `}>
+              <div className={classNames(
+                'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
+                'text-4xl',
+                isSubmitting ? '' : 'hidden'
+              )}>
                 <Loader />
               </div>
             </div>
@@ -363,9 +365,9 @@ export default function Form({
 
         </div>
       </form>
-      <GrecaptchaBrandingVisibility className={`
-        text-text text-xs opacity-80 pt-2 lg:pt-0 lg:absolute lg:translate-y-1
-        `} />
+      <GrecaptchaBrandingVisibility className={classNames(
+        'text-text text-xs opacity-80 pt-2 lg:pt-0 lg:absolute lg:translate-y-1'
+      )} />
     </>
   );
 }

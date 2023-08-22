@@ -1,5 +1,7 @@
 "use client";
 
+import classNames from 'classnames';
+
 import { HTMLAttributes, createContext, useContext, useRef, useState } from "react";
 
 const OverflowYContext = createContext((prevent: boolean) => { });
@@ -18,10 +20,10 @@ export function Body({ children, className, ...restProps }: HTMLAttributes<HTMLB
   }
 
   return (
-    <body className={`
-      ${className}
-      ${isOverflowYHidden ? 'mobile:overflow-y-hidden' : ''}
-    `} {...restProps} ref={bodyRef}>
+    <body className={classNames(
+      className,
+      isOverflowYHidden ? 'mobile:overflow-y-hidden' : ''
+    )} {...restProps} ref={bodyRef}>
       <OverflowYContext.Provider value={handleIsOverflowYHidden}>
         {children}
       </OverflowYContext.Provider>

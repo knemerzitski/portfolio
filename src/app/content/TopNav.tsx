@@ -7,6 +7,8 @@ import NavItems, { NavLink } from '@/components/nav/NavItems';
 
 import { name as portfolioName, resumeUrl, resumeVersion } from '@/app/portfolio';
 
+import classNames from 'classnames';
+
 const links: NavLink[] = [
   {
     href: '/',
@@ -54,38 +56,30 @@ export default function TopNav() {
         checked={isMobileNavOpen} className="checkbox" hidden
       />
       {/* OVERLAY ON MOBILE MENU OPEN */}
-      <label htmlFor={topNavId} className={`
-        overlay
-        
-        fixed w-full h-full
-        bg-overlay/50
-        z-10
-        invisible md:hidden
-      `}></label>
+      <label htmlFor={topNavId} className={classNames(
+        'overlay',
+        'fixed w-full h-full',
+        'bg-overlay/50',
+        'z-10',
+        'invisible md:hidden'
+      )}></label>
 
-      <header className="
-        fixed w-full z-10 top-0
-      ">
+      <header className="fixed w-full z-10 top-0">
 
         {/* DESKTOP & MOBILE WITH ICON */}
-        <div className={`
-          mainNav
-
-          px-6 md:px-10
-
-          bg-primary-800/95
-          backdrop-blur-xs
-          shadow-dp24 shadow-black/40
-        `}>
-          <div className="
-            max-w-screen-lg mx-auto
-            flex items-center justify-between
-          ">
+        <div className={classNames(
+          'mainNav',
+          'px-6 md:px-10',
+          'bg-primary-800/95',
+          'backdrop-blur-xs',
+          'shadow-dp24 shadow-black/40'
+        )}>
+          <div className="max-w-screen-lg mx-auto flex items-center justify-between">
             {/* DESKTOP NAV */}
-            <nav className={`
-              hidden
-              md:block
-            `}>
+            <nav className={classNames(
+              'hidden',
+              'md:block'
+            )}>
               <NavItems
                 links={links}
                 ulClassName="flex gap-2 text-lg"
@@ -95,19 +89,19 @@ export default function TopNav() {
             </nav>
 
             {/* MOBILE ICON */}
-            <label htmlFor={topNavId} className={`
-              relative 
-              px-2 py-4 md:py-6
-              text-xl
-              hover:cursor-pointer
-              block md:hidden
-            `}>
+            <label htmlFor={topNavId} className={classNames(
+              'relative',
+              'px-2 py-4 md:py-6',
+              'text-xl',
+              'hover:cursor-pointer',
+              'block md:hidden'
+            )}>
               <div className="w-5 h-5">
-                <div className={`openIcon absolute visible`}>
+                <div className="openIcon absolute visible">
                   <span className="sr-only">Open Menu</span>
                   <Icon type="bars" className="w-auto h-5" />
                 </div>
-                <div className={`closeIcon absolute invisible`}>
+                <div className="closeIcon absolute invisible">
                   <span className="sr-only">Close Menu</span>
                   <Icon type="xmark" className="w-auto h-5" />
                 </div>
@@ -122,16 +116,15 @@ export default function TopNav() {
         </div>
 
         {/* MOBILE STACK MENU */}
-        <div className={`
-          mobileMenu
-
-          absolute w-[95%] 
-          bg-primary-800
-          border border-solid border-transparent border-t-primary-950 
-          shadow-dp6 shadow-shadow/60
-          md:hidden -z-10
-          invisible 
-        `}>
+        <div className={classNames(
+          'mobileMenu',
+          'absolute w-[95%]',
+          'bg-primary-800',
+          'border border-solid border-transparent border-t-primary-950',
+          'shadow-dp6 shadow-shadow/60',
+          'md:hidden -z-10',
+          'invisible'
+        )}>
 
           {/* MOBILE NAV */}
           <nav className="overflow-y-auto max-h-[calc(100vh-4.5rem)] short:overflow-y-hidden short:max-h-max">

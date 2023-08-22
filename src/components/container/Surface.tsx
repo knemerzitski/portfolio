@@ -1,4 +1,5 @@
 import { ComponentPropsWithRef, ElementType, createContext, useContext } from 'react';
+import classNames from 'classnames';
 
 const LevelContext = createContext<number>(0);
 
@@ -8,7 +9,7 @@ export type SurfaceProps<C extends ElementType> = {
 } & ComponentPropsWithRef<C>
 
 function getLevelColor(level: number): string {
-  if(level == 0) return 'background';
+  if (level == 0) return 'background';
   return level % 2 == 0 ? 'primary-700' : 'primary-800';
 }
 
@@ -29,10 +30,10 @@ export default function Surface<C extends ElementType = 'div'>({
   const color = getLevelColor(level);
 
   return (
-    <Component className={`
-      bg-${color}
-      ${className}
-    `} {...restProps}>
+    <Component className={classNames(
+      `bg-${color}`,
+      className
+    )} {...restProps}>
       <LevelContext.Provider value={level}>
         {children}
       </LevelContext.Provider>

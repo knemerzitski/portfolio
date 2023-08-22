@@ -2,6 +2,7 @@
 
 import { MouseEvent, ReactNode, useEffect, useRef } from "react";
 import { usePreventBodyScrollContext } from "@/components/container/Body";
+import classNames from 'classnames';
 
 export interface ModalProps {
   overlayCloseable?: boolean,
@@ -86,22 +87,23 @@ export default function Modal({
 
   return (
     <>
-      {overlay && <div className={`
-      z-10 fixed top-0 left-0 w-full h-full bg-overlay/40
-      `}
+      {overlay && <div className={classNames(
+        'z-10 fixed top-0 left-0 w-full h-full bg-overlay/40'
+      )}
         onClick={handleClickOutsideModal} ref={overlayRef}>
       </div>}
 
       {/* absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 */}
-      <div className={`
-          z-10 fixed ${positionClass} overflow-y-auto
-          bg-primary-600 shadow-dp24 shadow-shadow/50 rounded
-        `} onClick={handleClickModal}>
-        <div className={`
-           w-full h-full 
-           p-3 py-4 xs:p-6
-          ${className}
-        `}>
+      <div className={classNames(
+        positionClass,
+        'z-10 fixed overflow-y-auto',
+        'bg-primary-600 shadow-dp24 shadow-shadow/50 rounded'
+      )} onClick={handleClickModal}>
+        <div className={classNames(
+          'w-full h-full',
+          'p-3 py-4 xs:p-6',
+          className
+        )}>
           {children}
         </div>
       </div>

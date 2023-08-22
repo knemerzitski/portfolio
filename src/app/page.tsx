@@ -9,6 +9,7 @@ import Icon from '@/components/info/Icon';
 import ContactForm from '@/app/content/ContactForm';
 import Anchor from '@/components/nav/Anchor';
 import HeroImage from '@/app/content/HeroImage';
+import classNames from 'classnames';
 
 import {
   name as portfolioName,
@@ -141,11 +142,11 @@ export default function HomePage() {
             <ul className="flex justify-center flex-wrap gap-8 my-8">
               {skills.map(({ text, icon }) => (
                 <li key={text}>
-                  <div className={`
-                    text-lg font-medium
-                    p-4 rounded-lg
-                    flex flex-col gap-2 items-center
-                  `}>
+                  <div className={classNames(
+                    'text-lg font-medium',
+                    'p-4 rounded-lg',
+                    'flex flex-col gap-2 items-center'
+                  )}>
                     {icon ?
                       <Icon type={icon} className="w-auto h-10 sm:h-14" />
                       :

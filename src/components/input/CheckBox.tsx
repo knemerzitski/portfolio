@@ -1,4 +1,6 @@
 import { InputHTMLAttributes } from "react";
+import classNames from 'classnames';
+
 
 type CheckBoxProps = {
   label: string,
@@ -14,26 +16,20 @@ export function CheckBox({
   const id = `checkbox-${label}`;
   return (
     <>
-      <input id={id} className={`
-        rounded-sm
-        relative inline-block
-        border border-solid border-text/80
-        checked:border-secondary-600
-        hover:cursor-pointer
-
-        focus:ouline-0
-        focus-visible:outline
-        focus-visible:outline-1
-        focus-visible:outline-secondary-500
-        checked:focus-visible:outline-secondary-300
-
-        checked:after:text-secondary-600
-
-        ${className}
-      `}
-        type="checkbox"
-        {...restProps}
-      />
+      <input id={id} className={classNames(
+        'rounded-sm',
+        'relative inline-block',
+        'border border-solid border-text/80',
+        'checked:border-secondary-600',
+        'hover:cursor-pointer',
+        'focus:ouline-0',
+        'focus-visible:outline',
+        'focus-visible:outline-1',
+        'focus-visible:outline-secondary-500',
+        'checked:focus-visible:outline-secondary-300',
+        'checked:after:text-secondary-600',
+        className
+      )} type="checkbox" {...restProps} />
       <label className="pl-2 hover:cursor-pointer" htmlFor={id}>{label}</label>
       <style jsx>{`
         input {

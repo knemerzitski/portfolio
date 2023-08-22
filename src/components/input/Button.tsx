@@ -1,39 +1,39 @@
 import { ButtonHTMLAttributes } from 'react';
+import classNames from 'classnames';
 
-const baseClassNames = `
-  text-lg
-  px-5 xs:px-7 
-  py-3 xs:py-4
-  
-  rounded-sm
-  shadow-dp4 shadow-shadow/40
 
-  hover:brightness-110
-  hover:shadow-btn-hover
+const baseClassNames = classNames(
+  'text-lg',
+  'px-5 xs:px-7 ',
+  'py-3 xs:py-4',
 
-  focus:outline-0
-  focus-visible:outline
-  focus-visible:outline-1
+  'rounded-sm',
+  'shadow-dp4 shadow-shadow/40',
 
-  active:translate-y-[1px]
-  active:outline-none
+  'hover:brightness-110',
+  'hover:shadow-btn-hover',
 
-  disabled:brightness-[70%]
-  disabled:cursor-not-allowed
-  disabled:shadow-none
-`;
+  'focus:outline-0',
+  'focus-visible:outline',
+  'focus-visible:outline-1',
+
+  'active:translate-y-[1px]',
+  'active:outline-none',
+
+  'disabled:brightness-[70%]',
+  'disabled:cursor-not-allowed',
+  'disabled:shadow-none',
+);
 
 export default function Button({ children, className = '', ...restProps }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button className={`
-      ${baseClassNames}
-      bg-secondary-700
-      text-text
-      focus-visible:outline-secondary-500
-      ${className}
-    `}
-      {...restProps}
-    >
+    <button className={classNames(
+      baseClassNames,
+      'bg-secondary-700',
+      'text-text',
+      'focus-visible:outline-secondary-500',
+      className
+      )} {...restProps}>
       {children}
     </button>
   );
@@ -41,15 +41,13 @@ export default function Button({ children, className = '', ...restProps }: Butto
 
 export function SecondaryButton({ children, className = '', ...restProps }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button className={`
-      ${baseClassNames}
-      bg-primary-400
-      text-text/80
-      focus-visible:outline-text/30
-      ${className}
-    `}
-      {...restProps}
-    >
+    <button className={classNames(
+      baseClassNames,
+      'bg-primary-400',
+      'text-text/80',
+      'focus-visible:outline-text/30',
+      className
+    )} {...restProps}>
       {children}
     </button>
   );

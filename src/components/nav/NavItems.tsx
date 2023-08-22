@@ -3,6 +3,7 @@
 import { MouseEventHandler, ReactNode, useEffect, useState } from "react";
 import Anchor from "@/components/nav/Anchor";
 import { usePathname } from "next/navigation";
+import classNames from 'classnames';
 
 export interface NavLink {
   href: string,
@@ -102,10 +103,10 @@ export default function NavItems({
       <ul className={ulClassName}>
         {links.map(({ href, innerNode }, index) => (
           <li className={liClassName} key={index}>
-            <Anchor className={`
-              ${activeNavIndex === index ? aActiveClassName : ''} 
-              ${aClassName}
-            `} href={href} onClick={onNavLinkClick} >
+            <Anchor className={classNames(
+              activeNavIndex === index ? aActiveClassName : '',
+              aClassName
+            )} href={href} onClick={onNavLinkClick} >
               {innerNode}
             </Anchor>
           </li>
