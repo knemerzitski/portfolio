@@ -8,12 +8,17 @@ import { AnchorHTMLAttributes, MouseEvent } from "react";
 const reduceMotionQuery = typeof window !== 'undefined' ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
 const canScrollIntoView = typeof document !== 'undefined' && typeof document.body.scrollIntoView === 'function';
 
-export default function Anchor({ children, href, ...restProps }: AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps) {
+export default function Anchor({ children, onClick, href, ...restProps }: AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps) {
   const router = useRouter();
   const pathname = usePathname() ?? '/';
   const hashContext = useHashContext();
 
   function handleOnClick(e: MouseEvent<HTMLAnchorElement>) {
+    if(onClick){
+      onClick(e);
+      if(e.defaultPrevented) return;
+    }
+
     if ((href.startsWith('/') && !href.startsWith(pathname)) || !href.includes('#')) return;
     e.preventDefault();
 
