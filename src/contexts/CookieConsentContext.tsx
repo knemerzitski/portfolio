@@ -68,7 +68,7 @@ const cookieDescriptions = {
 
 export const COOKIES: Readonly<typeof cookieDescriptions.cookieGroups> = cookieDescriptions.cookieGroups;
 
-type CookieKeys = keyof typeof COOKIES;
+export type CookieKeys = keyof typeof COOKIES;
 
 type CookieConsent = {
   [key in CookieKeys]: boolean;

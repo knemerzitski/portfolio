@@ -11,7 +11,7 @@ import imgIsikregCardRegister from '@/assets/images/isikreg/personnel-registrati
 import imgIsikregInsertPerson from '@/assets/images/isikreg/personnel-registration-app-insert-person.webp';
 
 import Icon, { IconNames } from "@/components/info/Icon";
-import IntersectionSuspense from "@/components/container/IntersectionSuspense";
+import YouTubeBlocker from "@/components/container/YouTubeBlocker";
 
 
 export const name = 'Kevin Nemeržitksi';
@@ -191,35 +191,18 @@ export const projects = [
       </p>
     </>,
     hero: (
-      <IntersectionSuspense className="aspect-video w-full mx-auto" rootMargin="200px"
+      <YouTubeBlocker linkText="Demo on YouTube" videoHash="syDuKJNU7PU"
         fallback={(
           <Image key="mainPage" className="object-cover object-top w-full h-full rounded" sizes="(max-width: 768px) 100vw, 512px" src={imgIsikregCardRegister}
             alt="Personnel Registration Application smartcard registration successful" />
-        )}>
-        <iframe key="youtubeDemo" className={`
-          aspect-video w-full mx-auto
-        `}
-          loading="lazy"
-          src="https://www.youtube-nocookie.com/embed/syDuKJNU7PU"
-          title="YouTube video player"
-          allow="accelerometer; encrypted-media; gyroscope; web-share" allowFullScreen>
-        </iframe>
-      </IntersectionSuspense>
+        )}
+      />
     ),
     categories: [
       {
         title: 'Short Demo',
         list: [
-          <IntersectionSuspense key="youtubeDemo" className="aspect-video w-full mx-auto bg-black" rootMargin="200px">
-            <iframe className={`
-              aspect-video w-full mx-auto
-            `}
-              loading="lazy"
-              src="https://www.youtube-nocookie.com/embed/syDuKJNU7PU"
-              title="YouTube video player"
-              allow="accelerometer; encrypted-media; gyroscope; web-share" allowFullScreen>
-            </iframe>
-          </IntersectionSuspense>
+          <YouTubeBlocker key="youtubeDemo" linkText="Demo on YouTube" videoHash="syDuKJNU7PU" />
         ]
       },
       {
@@ -235,4 +218,4 @@ export const projects = [
       'Java', 'C#', 'PC/SC', 'JavaFX', 'WPF', 'XAML', 'Excel'
     ]
   }
-];  
+];
