@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && next-export-optimize-images",
+    "start": "http-server ./out",
     "lint": "next lint",
     "deploy": ".bin/deploy"
   },
@@ -29,6 +29,8 @@
     "autoprefixer": "^10.4.14",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
+    "http-server": "^14.1.1",
+    "next-export-optimize-images": "github:knemerzitski/next-export-optimize-images#prepare",
     "postcss": "^8.4.26",
     "sharp": "^0.32.4",
     "tailwindcss": "^3.3.3",

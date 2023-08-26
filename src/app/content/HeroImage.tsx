@@ -1,3 +1,4 @@
+'use client';
 
 import Image, { ImageProps, unstable_getImgProps as getImgProps } from "next/image";
 
@@ -19,6 +20,9 @@ export default function HeroImage() {
   // Extract srcset from image props using unstable Next feature
   const { props: { srcSet: mobileSrcSet } } = getImgProps({
     ...commonImgProps,
+    loader: ({ src, width }) => {
+      return `/_next/static/chunks/images${src.replace(/(\.[^.]+)$/i, `_${width}$1`)}`;
+    },
     alt: '',
     src: mobileImg
   });
