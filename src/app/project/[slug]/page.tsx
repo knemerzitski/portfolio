@@ -8,7 +8,7 @@ import { notFound } from 'next/navigation';
 
 
 export async function generateStaticParams() {
-  return projects.map(project => project.slug);
+  return projects.map(project => ({ slug: project.slug }));
 }
 
 
