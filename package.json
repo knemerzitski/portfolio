@@ -5,28 +5,34 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next-export-optimize-images",
-    "start": "http-server ./out",
+    "start": "http-server -p 3000 ./out",
     "lint": "next lint",
-    "deploy": ".bin/deploy"
+    "deploy": "cdk deploy"
   },
   "dependencies": {
     "@aws-sdk/client-sesv2": "^3.370.0",
     "@react-hook/intersection-observer": "^3.1.1",
+    "aws-cdk-lib": "^2.93.0",
+    "aws-sdk": "^2.1445.0",
     "classnames": "^2.3.2",
-    "debug": "^4.3.4",
+    "constructs": "^10.2.69",
     "lodash": "^4.17.21",
-    "next": "13.4.12",
+    "next": "^13.4.12",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "source-map-support": "^0.5.21"
   },
   "devDependencies": {
+    "@aws-sdk/client-ssm": "^3.398.0",
     "@svgr/webpack": "^8.0.1",
-    "@types/debug": "^4.1.8",
+    "@types/aws-lambda": "^8.10.119",
     "@types/lodash": "^4.14.195",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "^10.4.14",
+    "aws-cdk": "^2.93.0",
+    "dotenv": "^16.3.1",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "http-server": "^14.1.1",
@@ -34,6 +40,8 @@
     "postcss": "^8.4.26",
     "sharp": "^0.32.4",
     "tailwindcss": "^3.3.3",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "5.1.6"
   }
 }

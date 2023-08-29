@@ -10,6 +10,7 @@
       "**/bower_components": true,
       "**/*.code-search": true,
       "**/*.next": true,
+      "**/cdk.out": true,
     },
     "css.lint.unknownAtRules": "ignore",
     "files.associations": {
