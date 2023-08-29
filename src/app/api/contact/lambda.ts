@@ -29,7 +29,7 @@ export async function main(event: APIGatewayProxyEvent, context: Context): Promi
 
       const grecaptchaSecretKey = ssmRes.Parameter?.Value ?? '';
       if (!grecaptchaSecretKey) {
-        throw Error(`Cloudn't fetch grecaptcaha secret key from parameter '${ssmCommand.input.Name}'`);
+        throw new Error(`Cloudn't fetch grecaptcaha secret key from parameter '${ssmCommand.input.Name}'`);
       }
 
       const res = await handleRequest({

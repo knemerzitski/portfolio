@@ -112,7 +112,7 @@ export class InfraStack extends Stack {
     }
 
     if (!process.env.CLOUDFRONT_CERTIFICATE_ARN) {
-      throw Error(`Env 'CLOUDFRONT_CERTIFICATE_ARN' must be defined`);
+      throw new Error(`Env 'CLOUDFRONT_CERTIFICATE_ARN' must be defined`);
     }
 
     const cdnDistribution = new Distribution(this, 'Distribution', {

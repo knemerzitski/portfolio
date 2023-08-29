@@ -17,25 +17,25 @@ export class ApiStack extends NestedStack {
     super(scope, id, props);
 
     if(!process.env.GRECAPTCHA_SECRET_KEY_STORE_PARAMETER_NAME){
-      throw Error(`Env 'GRECAPTCHA_SECRET_KEY_STORE_PARAMETER_NAME' must be defined`);
+      throw new Error(`Env 'GRECAPTCHA_SECRET_KEY_STORE_PARAMETER_NAME' must be defined`);
     }
     if(!process.env.SES_REGION){
-      throw Error(`Env 'SES_REGION' must be defined`);
+      throw new Error(`Env 'SES_REGION' must be defined`);
     }
     if(!process.env.SSM_REGION){
-      throw Error(`Env 'SSM_REGION' must be defined`);
+      throw new Error(`Env 'SSM_REGION' must be defined`);
     }
     if(!process.env.NODE_ENV){
-      throw Error(`Env 'NODE_ENV' must be defined`);
+      throw new Error(`Env 'NODE_ENV' must be defined`);
     }
     if(!process.env.CONTACT_FROM_ADDRESS){
-      throw Error(`Env 'CONTACT_FROM_ADDRESS' must be defined`);
+      throw new Error(`Env 'CONTACT_FROM_ADDRESS' must be defined`);
     }
     if(!process.env.CONTACT_TO_ADDRESS){
-      throw Error(`Env 'CONTACT_TO_ADDRESS' must be defined`);
+      throw new Error(`Env 'CONTACT_TO_ADDRESS' must be defined`);
     }
     if (!process.env.NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY) {
-      throw Error(`Env 'NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY' must be defined`);
+      throw new Error(`Env 'NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY' must be defined`);
     }
 
     const lambda = new NodejsFunction(this, 'Lambda', {
