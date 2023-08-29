@@ -2,14 +2,10 @@ const withExportImages = require('next-export-optimize-images');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   reactStrictMode: true,
+  trailingSlash: false,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
-  },
-  images: {
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    deviceSizes: [640, 768, 1080, 1280, 1536, 1920, 3840],
   },
   webpack(config) {
     config.module.rules.push({
@@ -26,6 +22,11 @@ const nextConfig = {
 
     return config;
   },
+}
+
+if (process.env.OUTPUT === 'export') {
+  nextConfig.output = 'export';
+}else{
 }
 
 module.exports = withExportImages(nextConfig);
