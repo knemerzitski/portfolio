@@ -10,7 +10,10 @@ import {
   PriceClass, ViewerProtocolPolicy,
   Function,
   FunctionCode,
-  BehaviorOptions
+  BehaviorOptions,
+  ResponseHeadersPolicy,
+  HeadersReferrerPolicy,
+  HeadersFrameOption,
 } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin, RestApiOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { ARecord, HostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
@@ -72,6 +75,28 @@ export class InfraStack extends Stack {
       autoDeleteObjects: true,
     });
 
+    const responseHeadersPolicy = new ResponseHeadersPolicy(this, 'SecureResponseHeadersPolicy', {
+      comment: 'Adds a set of security headers to every response',
+      securityHeadersBehavior: {
+        strictTransportSecurity: {
+          accessControlMaxAge: Duration.seconds(63072000),
+          includeSubdomains: true,
+          override: true,
+        },
+        contentTypeOptions: {
+          override: true,
+        },
+        referrerPolicy: {
+          referrerPolicy: HeadersReferrerPolicy.SAME_ORIGIN,
+          override: true,
+        },
+        frameOptions: {
+          frameOption: HeadersFrameOption.DENY,
+          override: true,
+        },
+      }
+    });
+
     const cdnAdditionalBehaviors: Record<string, BehaviorOptions> = {};
 
     // API
@@ -96,6 +121,7 @@ export class InfraStack extends Stack {
         compress: true,
         cachePolicy: CachePolicy.CACHING_DISABLED,
         originRequestPolicy: OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
+        responseHeadersPolicy,
       };
     }
 
@@ -115,6 +141,7 @@ export class InfraStack extends Stack {
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         originRequestPolicy: OriginRequestPolicy.CORS_S3_ORIGIN,
+        responseHeadersPolicy,
         cachePolicy: new CachePolicy(this, 'CacheByAcceptHeaderPolicy', {
           minTtl: Duration.seconds(1),
           maxTtl: Duration.seconds(31536000),
