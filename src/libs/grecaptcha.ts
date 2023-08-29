@@ -1,6 +1,5 @@
 import { mockRecaptcha3 } from '@/libs/debug';
 // import { NextRequest } from 'next/server';
-import { GRECAPTCHA3_SECRET_KEY, NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY } from './env';
 import { ApiRequest } from '@/app/api';
 
 interface Grecaptcha {
@@ -10,7 +9,7 @@ interface Grecaptcha {
 
 declare const grecaptcha: Grecaptcha | undefined;
 
-const SITE_KEY = NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY;
+const SITE_KEY = process.env.NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY;
 
 const GOOD_SCORE = 0.3;
 const VERIFY_URL = 'https://www.recaptcha.net/recaptcha/api/siteverify';

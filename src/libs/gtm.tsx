@@ -1,7 +1,6 @@
 "use client";
 
 import Script from "next/script";
-import { NEXT_PUBLIC_GTM_ID } from "./env";
 import { useEffect, useRef, useState } from "react";
 import { useCookieConsentContext } from "@/contexts/CookieConsentContext";
 
@@ -12,7 +11,7 @@ type WindowWithDataLayer = Window & {
 declare const window: WindowWithDataLayer;
 
 
-const GTM_ID = NEXT_PUBLIC_GTM_ID;
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 export function isEnabled() {
   return GTM_ID != null;

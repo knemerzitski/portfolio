@@ -1,4 +1,4 @@
-const debugging = true;
+const debugging = process.env.NODE_ENV !== 'production';
 
 /**
  * Quick way to disable all debugging options

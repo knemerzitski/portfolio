@@ -6,8 +6,11 @@ import TextLink from '@/components/nav/TextLink';
 import { emailAddress } from '@/app/portfolio';
 import { action as formAction, formSchema } from '@/app/api/contact/form';
 import Form from '@/components/input/Form';
-import { NEXT_PUBLIC_CONTACT_FORM_DISABLED } from '@/libs/env';
 import { API_PATH } from '@/app/api/contact/handler';
+
+
+const _CONTACT_FORM_DISABLED = process.env.NEXT_PUBLIC_CONTACT_FORM_DISABLED?.trim();
+const CONTACT_FORM_DISABLED = _CONTACT_FORM_DISABLED === 'true' || _CONTACT_FORM_DISABLED === '1';
 
 export default function ContactForm() {
   const [isJsDisabled, setIsJsDisabled] = useState(true);
@@ -47,7 +50,7 @@ export default function ContactForm() {
   }
 
   function renderStatusMessage() {
-    if (NEXT_PUBLIC_CONTACT_FORM_DISABLED) {
+    if (CONTACT_FORM_DISABLED) {
       return (
         <>
           You can reach me via email&nbsp;
@@ -84,7 +87,7 @@ export default function ContactForm() {
         </p>
       </div>
 
-      {!NEXT_PUBLIC_CONTACT_FORM_DISABLED &&
+      {!CONTACT_FORM_DISABLED &&
         <Card>
           <Form
             action={formAction}

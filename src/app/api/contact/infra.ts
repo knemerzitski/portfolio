@@ -3,12 +3,6 @@ import { Construct } from "constructs";
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
-import {
-  SES_REGION,
-  CONTACT_FROM_ADDRESS,
-  CONTACT_TO_ADDRESS,
-  NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY,
-} from '@/libs/env';
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { RetentionDays } from "aws-cdk-lib/aws-logs";
 import { LambdaIntegration, IResource } from 'aws-cdk-lib/aws-apigateway';
@@ -25,17 +19,23 @@ export class ApiStack extends NestedStack {
     if(!process.env.GRECAPTCHA_SECRET_KEY_STORE_PARAMETER_NAME){
       throw Error(`Env 'GRECAPTCHA_SECRET_KEY_STORE_PARAMETER_NAME' must be defined`);
     }
+    if(!process.env.SES_REGION){
+      throw Error(`Env 'SES_REGION' must be defined`);
+    }
     if(!process.env.SSM_REGION){
       throw Error(`Env 'SSM_REGION' must be defined`);
     }
     if(!process.env.NODE_ENV){
       throw Error(`Env 'NODE_ENV' must be defined`);
     }
-
-    const condEnv: { [key: string]: string } = {};
-    if (NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY != null) {
-      console.warn('Grecaptcha site key is not defined. Lambda will not check for spam.');
-      condEnv.NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY = NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY;
+    if(!process.env.CONTACT_FROM_ADDRESS){
+      throw Error(`Env 'CONTACT_FROM_ADDRESS' must be defined`);
+    }
+    if(!process.env.CONTACT_TO_ADDRESS){
+      throw Error(`Env 'CONTACT_TO_ADDRESS' must be defined`);
+    }
+    if (!process.env.NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY) {
+      throw Error(`Env 'NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY' must be defined`);
     }
 
     const lambda = new NodejsFunction(this, 'Lambda', {
@@ -50,12 +50,12 @@ export class ApiStack extends NestedStack {
       },
       environment: {
         NODE_ENV: process.env.NODE_ENV,
-        SES_REGION,
+        SES_REGION: process.env.SES_REGION,
         SSM_REGION: process.env.SSM_REGION,
-        CONTACT_FROM_ADDRESS,
-        CONTACT_TO_ADDRESS,
+        CONTACT_FROM_ADDRESS: process.env.CONTACT_FROM_ADDRESS,
+        CONTACT_TO_ADDRESS: process.env.CONTACT_TO_ADDRESS,
+        NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY: process.env.NEXT_PUBLIC_GRECAPTCHA3_SITE_KEY,
         GRECAPTCHA_SECRET_KEY_STORE_PARAMETER_NAME: process.env.GRECAPTCHA_SECRET_KEY_STORE_PARAMETER_NAME,
-        ...condEnv,
       },
     });
 

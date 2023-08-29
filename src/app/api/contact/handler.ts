@@ -4,13 +4,11 @@ import { isEnabled as isRecaptchaEnabled, verify as recaptchaVerify } from "@/li
 import { parseSchema, validate } from "@/libs/validation";
 import { action as formAction, formSchema } from "./form";
 import { mockSesEmails } from '@/libs/debug';
-import { CONTACT_FROM_ADDRESS, CONTACT_TO_ADDRESS, NEXT_PUBLIC_CONTACT_FORM_DISABLED } from '@/libs/env';
 import { ApiRequest, ApiResponse } from '@/app/api';
-import { SES_REGION } from '@/libs/env';
 import { SESv2Client } from '@aws-sdk/client-sesv2';
 
 const sesClient = new SESv2Client({
-  region: SES_REGION,
+  region: process.env.SES_REGION,
 });
 
 const MOCK_SES = process.env.NODE_ENV === 'production' ? false : mockSesEmails;
@@ -25,11 +23,11 @@ export async function handleRequest(req: ApiRequest, {
 }: {
   grecaptchaSecretKey: string | undefined,
 }): Promise<ApiResponse> {
-  console.log('contact', req);
-  // Disabled
-  if (NEXT_PUBLIC_CONTACT_FORM_DISABLED) {
+  if (!process.env.CONTACT_FROM_ADDRESS ||
+    !process.env.CONTACT_TO_ADDRESS) {
     return { status: 503 };
   }
+  console.log('contact', req);
 
   // Validate json syntax
   let data: any = null;
@@ -86,7 +84,11 @@ export async function handleRequest(req: ApiRequest, {
   };
 
   // Prepare email
-  const sendEmailCommand = createSendEmailCommand(contactForm);
+  const sendEmailCommand = createSendEmailCommand({
+    ...contactForm,
+    fromAddress: process.env.CONTACT_FROM_ADDRESS,
+    toAddress: process.env.CONTACT_TO_ADDRESS,
+  });
 
   try {
     // Send email
@@ -145,18 +147,22 @@ function createSendEmailCommand(
   {
     name,
     email,
-    message
+    message,
+    fromAddress,
+    toAddress,
   }: {
     name: string,
     email: string,
     message: string,
+    fromAddress: string,
+    toAddress: string,
   }) {
 
   return new SendEmailCommand({
-    FromEmailAddress: CONTACT_FROM_ADDRESS,
+    FromEmailAddress: fromAddress,
     Destination: {
       ToAddresses: [
-        CONTACT_TO_ADDRESS
+        toAddress
       ],
     },
     ReplyToAddresses: [

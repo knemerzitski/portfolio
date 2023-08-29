@@ -2,16 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { handleRequest } from './handler';
 
-import { GRECAPTCHA3_SECRET_KEY } from '@/libs/env';
+const _CONTACT_FORM_DISABLED = process.env.NEXT_PUBLIC_CONTACT_FORM_DISABLED?.trim();
+const CONTACT_FORM_DISABLED = _CONTACT_FORM_DISABLED === 'true' || _CONTACT_FORM_DISABLED === '1';
 
 export async function POST(req: NextRequest) {
+  if (CONTACT_FORM_DISABLED) {
+    return new NextResponse(null, { status: 503 });
+  }
+
   const res = await handleRequest({
     json() {
       return req.json();
     },
     headers: Object.fromEntries(req.headers.entries()),
   }, {
-    grecaptchaSecretKey: GRECAPTCHA3_SECRET_KEY,
+    grecaptchaSecretKey: process.env.GRECAPTCHA3_SECRET_KEY,
   });
 
   if (res.json) {
