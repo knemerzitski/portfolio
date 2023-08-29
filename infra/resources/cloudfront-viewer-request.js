@@ -21,7 +21,7 @@ function handler(event) {
   var host = request.headers.host.value;
 
   // Redirect aliases to main domain
-  var expectedHost = 'export.knemerzitski.com';
+  var expectedHost = 'www.knemerzitski.com';
   if (host !== expectedHost) {
     var query = objectToFullQueryString(request.querystring);
 
