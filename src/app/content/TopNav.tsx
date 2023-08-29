@@ -8,10 +8,11 @@ import NavItems, { NavLink } from '@/components/nav/NavItems';
 import { name as portfolioName, resumeUrl, resumeVersion } from '@/app/portfolio';
 
 import classNames from 'classnames';
+import Anchor from '@/components/nav/Anchor';
 
 const links: NavLink[] = [
   {
-    href: '/',
+    href: '/#home',
     id: 'home',
     innerNode: 'Home'
   },
@@ -110,7 +111,7 @@ export default function TopNav() {
 
             {/* NAME */}
             <div className="flex">
-              <span className="text-base ml-4">{portfolioName}</span>
+              <Anchor className="text-base ml-4" href="/">{portfolioName}</Anchor>
             </div>
           </div>
         </div>
