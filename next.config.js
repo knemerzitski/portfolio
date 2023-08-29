@@ -7,7 +7,13 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  webpack(config) {
+  webpack(config, { isServer, nextRuntime, webpack }) {
+    if (isServer && nextRuntime === 'nodejs') {
+      config.plugins.push(
+        new webpack.IgnorePlugin({ resourceRegExp: /^aws-crt$/ })
+      );
+    }
+
     config.module.rules.push({
       test: /\.svg$/i,
       use: ['@svgr/webpack'],
@@ -26,7 +32,7 @@ const nextConfig = {
 
 if (process.env.OUTPUT === 'export') {
   nextConfig.output = 'export';
-}else{
+} else {
 }
 
 module.exports = withExportImages(nextConfig);
