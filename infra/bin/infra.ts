@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
-import { App } from 'aws-cdk-lib';
-import { InfraStack } from '../lib/infra-stack';
 
-// Load environment variables from files
 const dotenv = require('dotenv');
 dotenv.config({path: '.env.production.local'});
 dotenv.config({path: '.env.local'});
+
+import 'source-map-support/register';
+import { App } from 'aws-cdk-lib';
+import { InfraStack } from '../lib/infra-stack';
 
 const app = new App();
 new InfraStack(app, 'PortfolioInfraStack', {
