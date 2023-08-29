@@ -163,6 +163,13 @@ export function HashContextProvider({
         if (prevHashRef.current !== currentHashRef.current) {
           console.log('hashcontext', 'router back');
           router.back();
+
+          // Prevent scroll on back navigation
+          const scrollY = window.scrollY;
+          setTimeout(() => {
+            window.scrollTo({ top: scrollY, behavior: 'instant' });
+          }, 1);
+          
         } else {
           console.log('hashcontext', 'router replace');
           router.replace(window.location.pathname + window.location.search, { scroll: false });
