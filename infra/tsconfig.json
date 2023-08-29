@@ -20,12 +20,26 @@
     "inlineSources": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
+    "esModuleInterop": true,
     "typeRoots": [
-      "./node_modules/@types"
-    ]
+      "./../node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./../src/*"
+      ],
+    },
+    "outDir": "out",
+  },
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register",
+    ],
   },
   "exclude": [
     "node_modules",
-    "cdk.out"
+    "cdk.out",
+    "out"
   ]
 }
