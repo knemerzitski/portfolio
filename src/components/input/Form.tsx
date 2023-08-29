@@ -7,10 +7,13 @@ import isPlainObject from 'lodash/isPlainObject';
 import {
   isEnabled as isGrecaptchaEnabled,
   getToken as getGrecaptchaToken,
+} from '@/libs/grecaptcha';
+import {
   ApiScript as GrecaptchaScript,
   apiScriptLoadedPromise as grecaptchaScriptLoadedPromise,
   BrandingVisiblity as GrecaptchaBrandingVisibility
-} from '@/libs/grecaptcha';
+} from '@/libs/grecaptcha-components';
+
 import { useCookieConsentContext } from '@/contexts/CookieConsentContext';
 import dynamic from 'next/dynamic';
 
