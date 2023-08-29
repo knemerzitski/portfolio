@@ -13,6 +13,17 @@ export default function Anchor({ children, onClick, href, ...restProps }: Anchor
   const pathname = usePathname() ?? '/';
   const hashContext = useHashContext();
 
+
+  // Use regular a tag for normal files such as file.pdf
+  const isNextLink = !href.includes('.'); 
+  if (!isNextLink) {
+    return (
+      <a href={href} {...restProps}>
+        {children}
+      </a>
+    );
+  }
+
   function handleOnClick(e: MouseEvent<HTMLAnchorElement>) {
     if(onClick){
       onClick(e);
