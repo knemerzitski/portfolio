@@ -27,7 +27,6 @@ export async function handleRequest(req: ApiRequest, {
     !process.env.CONTACT_TO_ADDRESS) {
     return { status: 503 };
   }
-  console.log('contact', req);
 
   // Validate json syntax
   let data: any = null;
@@ -47,7 +46,7 @@ export async function handleRequest(req: ApiRequest, {
       throw e;
     }
   }
-  console.log('contact', data);
+  console.log('contact', {...data, token: `${data.token.slice(0,3)}...`});
 
   // Spam protection
   if (isRecaptchaEnabled() && grecaptchaSecretKey) {

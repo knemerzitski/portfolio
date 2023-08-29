@@ -33,7 +33,6 @@ async function fetchVerify(payload: FormData) {
       "hostname": 'localhost',
     }
   } else {
-    console.log('VERIFY_URL', VERIFY_URL);
     const res = await fetch(VERIFY_URL, {
       body: payload,
       method: 'POST',
