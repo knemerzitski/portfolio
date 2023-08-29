@@ -1,4 +1,4 @@
-import { NestedStack, NestedStackProps } from "aws-cdk-lib";
+import { Duration, NestedStack, NestedStackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
@@ -43,6 +43,8 @@ export class ApiStack extends NestedStack {
       runtime: Runtime.NODEJS_18_X,
       handler: 'main',
       logRetention: RetentionDays.ONE_DAY,
+      timeout: Duration.seconds(6),
+      memorySize: 160,
       bundling: {
         externalModules: ['@aws-sdk/*'],
         tsconfig: './infra/tsconfig.json',

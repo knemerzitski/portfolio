@@ -2,12 +2,12 @@ import { Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { RemovalPolicy, CfnOutput } from 'aws-cdk-lib';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
-import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
+import { BucketDeployment, BucketDeploymentProps, CacheControl, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import {
   AllowedMethods, CacheCookieBehavior, CacheHeaderBehavior,
   CachePolicy, CacheQueryStringBehavior, Distribution, FunctionEventType,
-  OriginRequestCookieBehavior, OriginRequestHeaderBehavior, OriginRequestPolicy,
-  OriginRequestQueryStringBehavior, PriceClass, ViewerProtocolPolicy,
+  OriginRequestPolicy,
+  PriceClass, ViewerProtocolPolicy,
   Function,
   FunctionCode,
   BehaviorOptions
@@ -21,6 +21,7 @@ import { EndpointType, IResource, RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { ApiStack as ContactFormPostApiStack } from '@/app/api/contact/infra';
 import { API_PATH as contactFormApiPath } from '@/app/api/contact/handler';
 import path from 'path';
+import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 
 const API_RESOURCES = [
   {
@@ -92,22 +93,9 @@ export class InfraStack extends Stack {
 
         allowedMethods: AllowedMethods.ALLOW_ALL,
         viewerProtocolPolicy: ViewerProtocolPolicy.HTTPS_ONLY,
-        compress: false,
-        cachePolicy: new CachePolicy(this, 'CacheDisabledAuthorizationPolicy', {
-          minTtl: Duration.seconds(0),
-          maxTtl: Duration.seconds(1),
-          defaultTtl: Duration.seconds(0),
-          headerBehavior: CacheHeaderBehavior.allowList('Authorization'),
-          queryStringBehavior: CacheQueryStringBehavior.all(),
-          cookieBehavior: CacheCookieBehavior.all(),
-          enableAcceptEncodingBrotli: true,
-          enableAcceptEncodingGzip: true,
-        }),
-        originRequestPolicy: new OriginRequestPolicy(this, 'NoForwardPolicy', {
-          headerBehavior: OriginRequestHeaderBehavior.none(),
-          queryStringBehavior: OriginRequestQueryStringBehavior.all(),
-          cookieBehavior: OriginRequestCookieBehavior.none(),
-        }),
+        compress: true,
+        cachePolicy: CachePolicy.CACHING_DISABLED,
+        originRequestPolicy: OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
       };
     }
 
@@ -124,19 +112,19 @@ export class InfraStack extends Stack {
       defaultBehavior: {
         origin: new S3Origin(staticFilesBucket),
         compress: true,
-        allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
+        allowedMethods: AllowedMethods.ALLOW_GET_HEAD,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        cachePolicy: CachePolicy.CACHING_DISABLED,
-        // cachePolicy: new CachePolicy(this, 'CacheByAcceptHeaderPolicy', {
-        //   minTtl: Duration.seconds(1),
-        //   maxTtl: Duration.seconds(31536000),
-        //   defaultTtl: Duration.seconds(86400),
-        //   headerBehavior: CacheHeaderBehavior.allowList('Accept'),
-        //   queryStringBehavior: CacheQueryStringBehavior.all(),
-        //   cookieBehavior: CacheCookieBehavior.none(),
-        //   enableAcceptEncodingBrotli: true,
-        //   enableAcceptEncodingGzip: true,
-        // }), // TODO enable caching
+        originRequestPolicy: OriginRequestPolicy.CORS_S3_ORIGIN,
+        cachePolicy: new CachePolicy(this, 'CacheByAcceptHeaderPolicy', {
+          minTtl: Duration.seconds(1),
+          maxTtl: Duration.seconds(31536000),
+          defaultTtl: Duration.seconds(86400),
+          headerBehavior: CacheHeaderBehavior.allowList('Accept'),
+          queryStringBehavior: CacheQueryStringBehavior.all(),
+          cookieBehavior: CacheCookieBehavior.none(),
+          enableAcceptEncodingBrotli: true,
+          enableAcceptEncodingGzip: true,
+        }),
         functionAssociations: [{
           eventType: FunctionEventType.VIEWER_REQUEST,
           function: new Function(this, 'CDNFunction', {
@@ -178,23 +166,30 @@ export class InfraStack extends Stack {
       });
     });
 
-    new BucketDeployment(this, 'AllExceptWebpDeployment', {
+    const commonDeploymentSettings: BucketDeploymentProps = {
+      logRetention: RetentionDays.ONE_DAY,
       sources: [Source.asset('./out')],
-      exclude: ['*.webp'],
       destinationBucket: staticFilesBucket,
-      //distribution: cdnDistribution, // TODO enable invalidation
-      //distributionPaths: ['/*'], // TODO enable invalidation
+      cacheControl: [
+        CacheControl.setPublic(),
+        CacheControl.maxAge(Duration.seconds(31536000)),
+        CacheControl.immutable(),
+      ],
+    }
+
+    new BucketDeployment(this, 'AllExceptWebpDeployment', {
+      ...commonDeploymentSettings,
+      exclude: ['*.webp'],
     });
     // S3 Deployment doesn't correctly identify webp mime type so have to set it manually
     // It might be due to operating system's ability to detect mime types
     new BucketDeployment(this, 'OnlyWebpDeployment', {
-      sources: [Source.asset('./out')],
+      ...commonDeploymentSettings,
       exclude: ['*'],
       include: ['*.webp'],
       contentType: 'image/webp',
-      destinationBucket: staticFilesBucket,
-      //distribution: cdnDistribution, // TODO enable invalidation
-      //distributionPaths: ['/*'], // TODO enable invalidation
+      distribution: cdnDistribution,
+      distributionPaths: ['/*'],
     });
 
 
