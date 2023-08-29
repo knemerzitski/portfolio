@@ -9,6 +9,7 @@
 # next.js
 /.next/
 /out/
+/out.zip
 
 # production
 /build
@@ -31,4 +32,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
 
