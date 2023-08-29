@@ -5,10 +5,9 @@ import Card from '@/components/container/Card';
 import TextLink from '@/components/nav/TextLink';
 import { emailAddress } from '@/app/portfolio';
 import { action as formAction, formSchema } from '@/app/api/contact/form';
-import Form from '../../components/input/Form';
+import Form from '@/components/input/Form';
 import { NEXT_PUBLIC_CONTACT_FORM_DISABLED } from '@/libs/env';
-
-const API_PATH = '/api/contact';
+import { API_PATH } from '@/app/api/contact/handler';
 
 export default function ContactForm() {
   const [isJsDisabled, setIsJsDisabled] = useState(true);
