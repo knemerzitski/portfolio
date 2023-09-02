@@ -7,6 +7,8 @@ import mobileImg from '@/assets/images/hexagons-gear-night-sky-mobile.webp';
 
 import dynamic from "next/dynamic";
 
+const { exportableLoader } = require('next-export-optimize-images/dist/components/image');
+
 const HeroParticles = dynamic(() => import('./HeroParticles'));
 
 export default function HeroImage() {
@@ -20,11 +22,9 @@ export default function HeroImage() {
   // Extract srcset from image props using unstable Next feature
   const { props: { srcSet: mobileSrcSet } } = getImgProps({
     ...commonImgProps,
-    loader: ({ src, width }) => {
-      return `/_next/static/chunks/images${src.replace(/(\.[^.]+)$/i, `_${width}$1`)}`;
-    },
+    src: mobileImg,
+    loader: exportableLoader,
     alt: '',
-    src: mobileImg
   });
 
   return (

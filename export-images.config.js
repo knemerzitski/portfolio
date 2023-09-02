@@ -2,7 +2,6 @@
  * @type {import('next-export-optimize-images').Config}
  */
 const config = {
-  imageDir: '_next/static/chunks/images',
   sharpOptions: {
     'webp': {
       quality: 95,
@@ -11,9 +10,9 @@ const config = {
       quality: 75,
     }
   },
-  generateExtraExtensions: [
+  generateFormats: [
     'jpg',
-  ],
+  ]
 };
 
 module.exports = config
