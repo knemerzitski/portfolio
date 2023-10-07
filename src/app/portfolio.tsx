@@ -23,9 +23,9 @@ export const metaTitle = name;
 export const metaDescription = `${name} is a ${title.toLowerCase()} who loves problem-solving and spending his time around technology.`;
 
 export const resumeUrl = '/resume.pdf';
-export const resumeVersion = '1';
+export const resumeVersion = '2';
 export const githubUrl = 'https://github.com/knemerzitski';
-export const emailAddress = 'kevin@knemerzitski.com';
+export const emailAddress = 'hello@knemerzitski.com';
 
 export const quickAboutMe = (
   <>
