@@ -193,32 +193,65 @@ export class InfraStack extends Stack {
       });
     });
 
-    const commonDeploymentSettings: BucketDeploymentProps = {
-      logRetention: RetentionDays.ONE_DAY,
-      sources: [Source.asset('./out')],
+    // Files *.html cache with validation
+    new BucketDeployment(this, 'OnlyHtmlDeployment', {
       destinationBucket: staticFilesBucket,
+      sources: [
+        Source.asset('./out', {
+          exclude: ['*.*', '!*.html'],
+        }),
+      ],
+      exclude: ['*'],
+      include: ['*.html'],
+      // Always ask CloudFront is file has changed
+      cacheControl: [CacheControl.mustRevalidate()],
+      logRetention: RetentionDays.ONE_DAY,
+    });
+    // CacheControl.noCache(), CacheControl.mustRevalidate() => RefreshHit from cloudfront
+    // CacheControl.noCache() => RefreshHit from cloudfront
+  // CacheControl.mustRevalidate() => Hit from cloudfront
+    
+
+    // Files *.webp cache for 1 year
+    // S3 Deployment doesn't correctly identify webp mime type so have to set it manually
+    // It might be due to operating system's ability to detect mime types
+    new BucketDeployment(this, 'OnlyWebpDeployment', {
+      destinationBucket: staticFilesBucket,
+      sources: [
+        Source.asset('./out', {
+          exclude: ['*.*', '!*.webp'],
+        }),
+      ],
+      exclude: ['*'],
+      include: ['*.webp'],
       cacheControl: [
         CacheControl.setPublic(),
         CacheControl.maxAge(Duration.seconds(31536000)),
         CacheControl.immutable(),
       ],
-    }
-
-    new BucketDeployment(this, 'AllExceptWebpDeployment', {
-      ...commonDeploymentSettings,
-      exclude: ['*.webp'],
-    });
-    // S3 Deployment doesn't correctly identify webp mime type so have to set it manually
-    // It might be due to operating system's ability to detect mime types
-    new BucketDeployment(this, 'OnlyWebpDeployment', {
-      ...commonDeploymentSettings,
-      exclude: ['*'],
-      include: ['*.webp'],
       contentType: 'image/webp',
+      logRetention: RetentionDays.ONE_DAY,
+    });
+
+    // Files * (except *.html and *.webp) cache for 1 year
+    new BucketDeployment(this, 'AllExceptHtmlWebpDepolyment', {
+      destinationBucket: staticFilesBucket,
+      sources: [
+        Source.asset('./out', {
+          exclude: ['*.html', '*.webp'],
+        }),
+      ],
+      exclude: ['*.html', '*.webp'],
+      cacheControl: [
+        CacheControl.setPublic(),
+        CacheControl.maxAge(Duration.seconds(31536000)),
+        CacheControl.immutable(),
+      ],
+      logRetention: RetentionDays.ONE_DAY,
+      // Trigger CloudFront Invalidation
       distribution: cdnDistribution,
       distributionPaths: ['/*'],
     });
-
 
     new CfnOutput(this, 'DistributionDomainName', {
       value: cdnDistribution.domainName,
